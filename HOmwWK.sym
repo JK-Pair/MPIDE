@@ -1,0 +1,86 @@
+W0      @SCRATCH
+W0L     _RETURN_
+W0 -W1  @DIV3232B.P1
+W0 -W1  @READ_ROM_MEMORY.P2
+W0      @delay_us1.P3
+W0      @delay_ms1.P4
+W0      @READBITA.P5
+W0      @WRITEBITA.P6
+W0      @PRINTF_X_9600_5725_5724.P7
+W1      @SCRATCH
+W1      @WRITE_PACKED_MEMORY.P1
+W1      @READBITA.P2
+W1      @PRINTF_X_9600_5725_5724.P3
+W1      @WRITEBITA.P4
+W1      @READ_PACKED_MEMORY.P5
+W2 -W3  @DIV3232B.P1
+W2      @READ_ROM_MEMORY.P2
+W2      @WRITE_PACKED_MEMORY.P3
+W2      @READ_PACKED_MEMORY.P4
+W2      @WRITEBITA.P5
+W3      @WRITE_PACKED_MEMORY.P1
+W3      @READ_ROM_MEMORY.P2
+W3      @READ_PACKED_MEMORY.P3
+630.6   C1OUT
+630.7   C2OUT
+800-807 swtCount
+808-80F refill
+810     swtFlag
+812-819 fp_ta
+81A-81B a
+81C-81D b
+81E-81F c
+820-821 d
+822-823 res
+824-825 SWTService.i
+82C-82D SystemTick.i
+2780-27FF Stack
+
+ROM Allocation:
+000DFC  @const772.call
+000E14  @WRITEBITA
+000E26  SystemTick
+000E7A  TIMER1_ISR
+000E9E  @GOTOPTR
+000EA2  Init_Timer1
+000EB0  @READBITA
+000EC2  @PRINTF_X_9600_5725_5724
+000EF6  task_led0
+000F58  task_led1
+000F78  task_led2
+000F98  task_led3
+000FB8  SWTService
+001018  @cinit1
+001018  MAIN
+001054  @cinit2
+
+Project Directory:
+    C:\Users\thipawan\Desktop\Embedded\MilestoneIII\MPIDE\
+
+Project Files:
+    HOmwWK.c                                                [01-Nov-18 20:56  CRC=C2589594]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\devices\24FJ48GA002.h [12-Nov-13 14:36  CRC=2B092578]
+    BL_Support.h                                            [28-Oct-16 04:52  CRC=87294453]
+
+Source signature=FBB443B2
+
+Units:
+    HOmwWK (main)
+
+Compiler Settings:
+    Processor:      PIC24FJ48GA002
+    Pointer Size:   16
+    ADC Range:      0-65535
+    Opt Level:      9
+    Short,Int,Long: SIGNED: 8,16,32
+    Float,Double:   32,64
+
+Output Files:
+    Errors:      HOmwWK.err
+    INHX8:       HOmwWK.hex
+    Symbols:     HOmwWK.sym
+    List:        HOmwWK.lst
+    Debug/COFF:  HOmwWK.cof
+    Project:     HOmwWK.ccspjt
+    Call Tree:   HOmwWK.tre
+    Statistics:  HOmwWK.STA

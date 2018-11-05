@@ -1,0 +1,53 @@
+
+ROM used:   1146/33788 (3%)
+            1146/33788 (3%) including unused fragments
+
+            1.2 Average locations per line
+            163.7 Average locations per statement
+
+RAM used:   128/8192 (2%) at main() level
+            136/8192 (2%) worst case
+
+Stack size: 128
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   32     7 100  pyAndPIC.c
+  862     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\devices\24FJ48GA002.h
+   33     0   0  BL_Support.h
+----- -----
+  927     7 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     68   3    8             @DIV3232B
+0     16   1    2             @delay_ms1
+0     36   2    1             @PUTCHAR_1_
+0     66   3    0    38  0.9  INT_EXT_INPUT0
+0     28   1    0             @const751
+0    132   6    0   185  3.0  MAIN
+0     56   2    0             @const756
+0    236  10    0             @PRINTFU32_744
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               2
+    Statements              7
+    Comments                162
+    Volume (V)              272
+    Difficulty (D)          3.2
+    Effort to implement (E) 883
+    Time to implement (T)   1 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   1
+    Maintainability (MI)    174
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00BFE     0  3072  
+00C00-00C02     4  0  
+00C04-00DFA   504  0  
+00DFC-083FA   638  29570  
+
+
+

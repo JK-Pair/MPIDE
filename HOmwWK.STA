@@ -1,0 +1,59 @@
+
+ROM used:   1224/33788 (4%)
+            1224/33788 (4%) including unused fragments
+
+            1.2 Average locations per line
+            19.1 Average locations per statement
+
+RAM used:   166/8192 (2%) at main() level
+            176/8192 (2%) worst case
+
+Stack size: 128
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  106    64 100  HOmwWK.c
+  862     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\devices\24FJ48GA002.h
+   33     0   0  BL_Support.h
+----- -----
+ 1001    64 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     84   3    5   289  5.5  SystemTick
+0     18   1    6             @WRITEBITA
+0     36   1    0    12  0.8  TIMER1_ISR
+0     96   4    7   249  5.5  SWTService
+0     18   1    5             @READBITA
+0      4   0    0             @GOTOPTR
+0     98   4    3   269  4.4  task_led0
+0     24   1    0             @const772
+0     52   2    2             @PRINTF_X_9600_5725_5724
+0     32   1    0   134  3.4  task_led1
+0     32   1    0   134  3.4  task_led2
+0     32   1    0   134  3.4  task_led3
+0     14   1    0    52  1.9  Init_Timer1
+0    176   7    3   339  3.3  MAIN
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               9
+    Statements              64
+    Comments                162
+    Volume (V)              2599
+    Difficulty (D)          31.1
+    Effort to implement (E) 80817
+    Time to implement (T)   1 hours, 15 minutes
+    Est Delivered Bugs (B)  1
+    Cyclomatic Complexity   14
+    Maintainability (MI)    124
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00BFE     0  3072  
+00C00-00C02     4  0  
+00C04-00DFA   504  0  
+00DFC-083FA   716  29492  
+
+
+

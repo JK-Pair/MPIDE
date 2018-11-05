@@ -1,0 +1,59 @@
+
+ROM used:   2402/33788 (7%)
+            2402/33788 (7%) including unused fragments
+
+            0.7 Average locations per line
+            2.2 Average locations per statement
+
+RAM used:   320/8192 (4%) at main() level
+            350/8192 (4%) worst case
+
+Stack size: 128
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  295   181  16  PositionCon.c
+  862     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\devices\24FJ48GA002.h
+   33     0   0  BL_Support.h
+ 2229   921  84  ..\..\..\..\..\..\Program Files (x86)\PICC\drivers\math.h
+----- -----
+ 3419  1102 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0    272   6    0             @MULFF64
+0     86   2    0             @F64TOSI64
+0    100   2    0             @SI64TOF64
+0    264   5    8             @DIVFF64
+0    278   6   13  1121  5.5  control_inputX
+0     70   1    9   259  5.7  move_posX
+0     42   1    0    66  2.9  INT_EXT_INPUT0
+0     42   1    0    66  2.9  INT_EXT_INPUT1
+0     42   1    0    66  2.9  INT_EXT_INPUT2
+0     38   1    0   236  2.3  Init_Interrupts
+0    394   8    0   238  3.1  MAIN
+0     20   0    0             @const1207
+0    246   5    0             @PRINTFD16_115200_5725_5724
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               7
+    Statements              1102
+    Comments                503
+    Volume (V)              2928
+    Difficulty (D)          26.2
+    Effort to implement (E) 76704
+    Time to implement (T)   1 hours, 11 minutes
+    Est Delivered Bugs (B)  1
+    Cyclomatic Complexity   10
+    Maintainability (MI)    84
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00BFE     0  3072  
+00C00-00C02     4  0  
+00C04-00DFA   504  0  
+00DFC-083FA  1894  28314  
+
+
+

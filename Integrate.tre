@@ -1,0 +1,17 @@
+ÀÄIntegrate
+   ÃÄMAIN  0/304  Ram=0
+   ³  ÃÄ@cinit1  (Inline)  Ram=0
+   ³  ÃÄInit_Interrupts  0/46  Ram=0
+   ³  ÃÄ@const817  0/26  Ram=0
+   ³  ÃÄ@PRINTFD16_115200_5725_5724  0/246  Ram=0
+   ³  ÃÄ@const817  0/26  Ram=0
+   ³  ÃÄ@PRINTFD16_115200_5725_5724  0/246  Ram=0
+   ³  ÃÄ@const817  0/26  Ram=0
+   ³  ÃÄ@PRINTFD16_115200_5725_5724  0/246  Ram=0
+   ³  ÃÄ@const817  0/26  Ram=0
+   ³  ÀÄ@PRINTFD16_115200_5725_5724  0/246  Ram=0
+   ÃÄUART1_Isr  0/50  Ram=2
+   ³  ÀÄSM_RxD  0/290  Ram=7
+   ÃÄINT_EXT_INPUT0  0/34  Ram=0
+   ÃÄINT_EXT_INPUT1  0/34  Ram=0
+   ÀÄINT_EXT_INPUT2  0/34  Ram=0

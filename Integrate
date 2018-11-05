@@ -1,0 +1,79 @@
+#include <24FJ48GA002.h>
+#include "BL_Support.h"
+#use delay (internal = 8 MHz, clock = 32MHz)
+#PIN_SELECT U1RX = PIN_B12 //PIN_B14 //
+#PIN_SELECT U1TX = PIN_B13 //PIN_B15 //
+#use rs232 (UART1, BAUD = 9600, XMIT = PIN_B13, RCV = PIN_B12)
+
+#define DEVICE_ID 2
+#define LENGTH 5
+
+char arrayData[20] = {};
+char checkSumII[1] = {};
+char SM_id = 1;
+int checkSum;
+int getPackage = 0;
+
+void SM_RxD(int c){
+	if (SM_id <= 2){
+		if (c == 255){
+			SM_id++;
+		}else{
+			SM_id = 1;
+		}
+	}else if (SM_id <= 3){
+		if (c == DEVICE_ID){
+			SM_id++;
+		}
+	}else if (SM_id <= 4){
+		if ( c == LENGTH){
+			SM_id++;
+		}
+	}else if (SM_id > 4 && SM_id <= 7){
+		arrayData[SM_id - 5] = c;
+		SM_id++;
+	}else if(SM_id >= 8){
+			checkSumII[SM_id - 8] = c;
+			checkSum = ~(DEVICE_ID + LENGTH + arrayData[0] + arrayData[1] + arrayData[2])+1;
+			checkSum &= 0xFF;
+			if(c == checkSum){
+				getPackage = 1;
+				SM_id = 1;}
+			}else{
+				SM_id = 1;
+	}
+}
+
+
+#INT_RDA               // receive data interrupt one time per one 
+void UART1_Isr() {
+    int c = getc();
+    SM_RxD(c);
+}
+void main(){
+	disable_interrupts(GLOBAL);
+	
+    clear_interrupt(INT_RDA);   // recommend style coding to confirm everything clear before use
+    enable_interrupts(INT_RDA);
+    
+	enable_interrupts(GLOBAL);
+	while(TRUE){
+			
+		if (getPackage >= 1){
+			getPackage = 0;
+
+			int check = checkSumII[0];
+			check &= 0xFF;
+
+			printf("\ncheckSum = %d\n", checkSum);
+			printf("\narrayData[3]= %d\n", check);
+
+			if(checkSum == check){  
+				printf("\ndataFromPIC = %d\n", arraydata[0]);
+				printf("\ndataFromPIC = %d\n", arraydata[1]);
+				printf("\ndataFromPIC = %d\n", arraydata[2]);
+			}	
+		}
+	}
+}
+

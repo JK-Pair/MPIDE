@@ -1,0 +1,76 @@
+W0      @SCRATCH
+W0L     _RETURN_
+W0 -W1  @DIV3232B.P1
+W0 -W1  @READ_ROM_MEMORY.P2
+W0      @delay_ms1.P3
+W0      @READBITA.P4
+W0      @delay_us1.P5
+W0      @WRITEBITA.P6
+W1      @SCRATCH
+W1      @WRITE_PACKED_MEMORY.P1
+W1      @READBITA.P2
+W1      @WRITEBITA.P3
+W1      @READ_PACKED_MEMORY.P4
+W2      @READ_PACKED_MEMORY.P1
+W2      @READ_ROM_MEMORY.P2
+W2      @WRITEBITA.P3
+W2 -W3  @DIV3232B.P4
+W2      @WRITE_PACKED_MEMORY.P5
+W3      @WRITE_PACKED_MEMORY.P1
+W3      @READ_PACKED_MEMORY.P2
+W3      @READ_ROM_MEMORY.P3
+630.6   C1OUT
+630.7   C2OUT
+800-807 swt_count
+808     swt_flag
+80A-811 fp_ta
+812-813 SWTService.i
+81A-81B SystemTick.i
+2780-27FF Stack
+
+ROM Allocation:
+000DFC  @WRITEBITA
+000E0E  SystemTick
+000E50  TIMER1_ISR
+000E74  @GOTOPTR
+000E78  Init_Timer1
+000E86  @READBITA
+000E98  LED0
+000E9E  LED1
+000EA4  LED2
+000EAA  LED3
+000EB0  SWTService
+000F10  @cinit1
+000F10  MAIN
+000F42  @cinit2
+
+Project Directory:
+    C:\Users\thipawan\Desktop\Embedded\MilestoneIII\MPIDE\
+
+Project Files:
+    Test.c                                                  [01-Nov-18 21:37  CRC=19E8F94D]
+    ..\..\..\..\..\..\Program Files (x86)\PICC\devices\24FJ48GA002.h [12-Nov-13 14:36  CRC=2B092578]
+    BL_Support.h                                            [28-Oct-16 04:52  CRC=87294453]
+
+Source signature=5344A76B
+
+Units:
+    Test (main)
+
+Compiler Settings:
+    Processor:      PIC24FJ48GA002
+    Pointer Size:   16
+    ADC Range:      0-65535
+    Opt Level:      9
+    Short,Int,Long: SIGNED: 8,16,32
+    Float,Double:   32,64
+
+Output Files:
+    Errors:      Test.err
+    INHX8:       Test.hex
+    Symbols:     Test.sym
+    List:        Test.lst
+    Debug/COFF:  Test.cof
+    Project:     Test.ccspjt
+    Call Tree:   Test.tre
+    Statistics:  Test.STA
