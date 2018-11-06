@@ -5,9 +5,6 @@
 #PIN_SELECT U1TX = PIN_B13 //PIN_B15 //
 #use rs232 (UART1, BAUD = 115200, XMIT = PIN_B13, RCV = PIN_B12)
 
-#define DEVICE_ID 0x02
-#define LENGTH 0x08
-
 
 #define TIME_PERIOD 2000
 #define tolerance 30
@@ -56,7 +53,6 @@ char arrayDataYII[2] = {};
 char SM_id = 1;
 int getPackage = 0;
 
-
 void SM_RxD(int c){
 	if (SM_id <= 2){
 		if (c ==  0xFF){
@@ -65,11 +61,11 @@ void SM_RxD(int c){
 			SM_id = 1;
 		}
 	}else if (SM_id <= 3){
-		if (c == DEVICE_ID){
+		if (c == 0x02){
 			SM_id++;
 		}
 	}else if (SM_id <= 4){
-		if ( c == LENGTH){
+		if ( c == 0x08){
 			SM_id++;
 		}
 	}else if (SM_id > 4 && SM_id <= 6){
@@ -216,7 +212,7 @@ void move_posX(int pulse_x, int direc){
 	int check = 1;
 	while(check == 1){  
 		int error = pulse_x - countX;
-				error *= 2;
+			error *= 2;
 		//printf("error:%d\n",error);
 		//delay_ms(10);
 
@@ -259,15 +255,15 @@ void move_posZ(int pulse_z, int direc){
 }
 
 
-void set_Z(pulse_z){
-	while(input(lim_SW_Z) == 0){
-	int error = pulse_z - countZ;
-		if(abs(error) <= tolerance){
-			control_inputZ(0, 0);	
-
-		}else{
-			control_inputZ(error, 0);
-		} 
+void set_Z(void){
+	int check = 1;
+	while(check == 1){ 
+		if(input(lim_SW_Z) == 1){
+			control_inputZ(0, 0);
+			check = 0;
+		}else if(input(lim_SW_Z) == 0){
+			control_inputZ(700, 0);
+		}
 	}
 }
 
@@ -277,23 +273,19 @@ void set_Zero(void){
 	int stateSWII = 0;
 	while(loop == 1){
 		if(stateSWII == 0){
-			if(input(lim_SW_Z) == 1){
-				control_inputZ(0,1);
-				stateSWII++;
-		}else if(input(lim_SW_Z) == 0){
-				control_inputZ(700,0);
-			}
-		}else if(stateSWII == 1){  //X-axial
+			set_Z();
+			stateSWII++;
+		}else if(stateSWII == 1){  
 			if(input(lim_SW_Y) == 1){
 				control_inputY(0,1);
 				stateSWII++;
 			}else if(input(lim_SW_Y) == 0){
 				control_inputY(700,0);
 			}
-		}else if(stateSWII == 2){  //X-axial
+		}else if(stateSWII == 2){  
 			if(input(lim_SW_X) == 1){
 				control_inputX(0,0);
-				loop = 0;
+				loop=0;
 			}else if(input(lim_SW_X) == 0){
 				control_inputX(700,0);
 			}
@@ -318,8 +310,7 @@ int stateSWIII = 0;
 			loop = 0;
 		}
 	} 
-}
-
+}	
 
 #INT_EXT0
 void INT_EXT_INPUT0 (void)
@@ -352,7 +343,7 @@ void Init_Interrupts()
 	enable_interrupts( INT_EXT2 );
 	ext_int_edge( 2, L_TO_H ) ;
 	
-	//setup_timer2(TMR_INTERNAL | TMR_DIV_BY_64 ,2500);
+	setup_timer2(TMR_INTERNAL | TMR_DIV_BY_64 ,5000);
 	setup_timer3(TMR_INTERNAL | TMR_DIV_BY_8 ,TIME_PERIOD);
 
 
@@ -367,33 +358,50 @@ void main(){
 	setup_compare(2, COMPARE_PWM | COMPARE_TIMER3);
 	setup_compare(3, COMPARE_PWM | COMPARE_TIMER3);
 
-	//setup_compare(4, COMPARE_PWM | COMPARE_TIMER2);
-	//setup_compare(5, COMPARE_PWM | COMPARE_TIMER2);
-
+	setup_compare(4, COMPARE_PWM | COMPARE_TIMER2);
+	setup_compare(5, COMPARE_PWM | COMPARE_TIMER2);
+	int stateI = 0;
 	while(TRUE){
+			//set_pwm_duty(5, 90);//for 5,up is 250,down is 110
+			for(int i=650;i>40;i-=10){
+			set_pwm_duty(4, i);//for 4,up is 650,down is 50
+			//printf("i: %d\n",i);
+			delay_ms(100);
+			}
+			//delay_ms(20);
+
+
+		//for(int i=0; i < 200;i+=10){
+		//	set_pwm_duty(4, i);
+			//printf("j: %d\n",j);
+		//	delay_ms(1000);
 		//set_Zero();
 		//set_Z(2000);
-		//move_posZ(10000,0);
-		//moveXYZ(3000, 1, 3000, 1, 1000, 1);
+		//move_posZ(3000,1);
+		//move_posY(3000,1);
+		//int bagPosX, bagPosY, goPosX, goPosY ;
 		if (getPackage >= 1){
 			getPackage = 0;
-
+			if(stateI ==0){
+			//moveXYZ(3000, 1, 3000, 1, 2500, 0);
 			//set_Zero();
-			//moveXYZ(3000, 1, 3000, 1, 1000, 1);
-			//move_posX(1000,0);
-			//	move_posZ(2000,0);
-			//move_posY(dataX, 0);
-			//move_posZ(3000, 1);
-			//	DataII = (cuntX/768) * 40;	
-			//printf("\ndataFromPIC = %d\n", arraydata[2]);
-			//int bagPosX, bagPosY, goPosX, goPosY ;
-			//memcpy(&test, arrayDataYII, sizeof(test));
+			//control_ServoTop(10, 1);
+			stateI++;
+			}
+			//move_posX(3000,1);
+			//moveXYZ(1000, 1, 1000, 1, 1000, 1);
+			//set_Zero();
+			//moveXYZ(3000, 1, 3000, 1, 1000, 1);	22
+			//memcpy(&bagPosX, arrayDataXI, sizeof(bagPosX));
+			//memcpy(&bagPosY, arrayDataYI, sizeof(bagPosY));
+			//memcpy(&goPosX, arrayDataXII, sizeof(goPosX));
+			//memcpy(&goPosY, arrayDataYII, sizeof(goPosY));
 			//printf("\nresult = %d\n", array[0]);
-			//printf("\nresult = %d\n", test);arrayData
-			printf("\nresult = %d\n", arrayData[0]);
-			printf("\nresult = %d\n", arrayData[1]);
-			printf("\nresult = %d\n", arrayData[2]);
-			printf("\nresult = %d\n", arrayData[3]);
+			//printf("\nresult = %d\n", bagPosX);
+			//printf("\nresult = %d\n", arrayData[0]);
+			//printf("\nresult = %d\n", arrayData[1]);
+			//printf("\nresult = %d\n", arrayData[2]);
+			//printf("\nresult = %d\n", arrayData[3]);
 		}	
 	}
 }

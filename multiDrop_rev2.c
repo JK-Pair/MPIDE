@@ -5,7 +5,6 @@
 #PIN_SELECT U1TX = PIN_B13 //PIN_B15 //
 #use rs232 (UART1, BAUD = 115200, XMIT = PIN_B13, RCV = PIN_B12)
 
-#define DEVICE_ID 0x02
 
 char arrayData[4] = {};
 char arrayDataXI[2] = {};
@@ -24,7 +23,7 @@ void SM_RxD(int c){
 			SM_id = 1;
 		}
 	}else if (SM_id <= 3){
-		if (c == DEVICE_ID){
+		if (c == 0x02){
 			SM_id++;
 		}
 	}else if (SM_id <= 4){
@@ -70,14 +69,14 @@ void main(){
 	while(TRUE){
 		if (getPackage >= 1){
 			getPackage = 0;
-			//int bagPosX, bagPosY, goPosX, goPosY ;
-			//memcpy(&test, arrayDataYII, sizeof(test));
+			int bagPosX;//, bagPosY, goPosX, goPosY ;
+			memcpy(&bagPosX, arrayDataXI, sizeof(bagPosX));
 			//printf("\nresult = %d\n", array[0]);
-			//printf("\nresult = %d\n", test);arrayData
-			printf("\nresult = %d\n", arrayData[0]);
-			printf("\nresult = %d\n", arrayData[1]);
-			printf("\nresult = %d\n", arrayData[2]);
-			printf("\nresult = %d\n", arrayData[3]);
+			printf("\nresult = %d\n", bagPosX);
+			//printf("\nresult = %d\n", arrayData[0]);
+			//printf("\nresult = %d\n", arrayData[1]);
+			//printf("\nresult = %d\n", arrayData[2]);
+			//printf("\nresult = %d\n", arrayData[3]);
 		}
 	}
 }

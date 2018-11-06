@@ -1,11 +1,11 @@
-CCS PCD C Compiler, Version 5.015, 5967               05-Nov-18 09:27
+CCS PCD C Compiler, Version 5.015, 5967               05-Nov-18 09:59
 
                Filename:   C:\Users\thipawan\Desktop\Embedded\MilestoneIII\MPIDE\multiDrop_rev2.lst
 
-               ROM used:   1442 bytes (4%)
-                           Largest free fragment is 29274
+               ROM used:   1322 bytes (4%)
+                           Largest free fragment is 29394
                RAM used:   143 (2%) at main() level
-                           147 (2%) worst case
+                           149 (2%) worst case
                Stack size: 128
 
 *
@@ -200,8 +200,6 @@ CCS PCD C Compiler, Version 5.015, 5967               05-Nov-18 09:27
 .................... #PIN_SELECT U1TX = PIN_B13 //PIN_B15 // 
 .................... #use rs232 (UART1, BAUD = 115200, XMIT = PIN_B13, RCV = PIN_B12) 
 ....................  
-.................... #define DEVICE_ID 2 
-.................... #define LENGTH 11 
 ....................  
 .................... char arrayData[4] = {}; 
 .................... char arrayDataXI[2] = {}; 
@@ -222,7 +220,7 @@ CCS PCD C Compiler, Version 5.015, 5967               05-Nov-18 09:27
 0E1E:  CP      W0,#2
 0E20:  BRA     GT,E32
 .................... 		if (c ==  0xFF){ 
-0E22:  MOV     812,W4
+0E22:  MOV     814,W4
 0E24:  XOR     #FF,W4
 0E26:  BRA     NZ,E2C
 .................... 			SM_id++; 
@@ -240,7 +238,7 @@ CCS PCD C Compiler, Version 5.015, 5967               05-Nov-18 09:27
 0E36:  CP      W0,#3
 0E38:  BRA     GT,E44
 .................... 		if (c == 0x02){ 
-0E3A:  MOV     812,W4
+0E3A:  MOV     814,W4
 0E3C:  CP      W4,#2
 0E3E:  BRA     NZ,E42
 .................... 			SM_id++; 
@@ -253,7 +251,7 @@ CCS PCD C Compiler, Version 5.015, 5967               05-Nov-18 09:27
 0E48:  CP      W0,#4
 0E4A:  BRA     GT,E56
 .................... 		if ( c == 0x08){ 
-0E4C:  MOV     812,W4
+0E4C:  MOV     814,W4
 0E4E:  CP      W4,#8
 0E50:  BRA     NZ,E54
 .................... 			SM_id++; 
@@ -275,7 +273,7 @@ CCS PCD C Compiler, Version 5.015, 5967               05-Nov-18 09:27
 0E6A:  SUB     W0,#5,W5
 0E6C:  MOV     #804,W4
 0E6E:  ADD     W5,W4,W6
-0E70:  MOV     812,W0
+0E70:  MOV     814,W0
 0E72:  MOV.B   W0L,[W6+#0]
 .................... 		SM_id++; 
 0E74:  INC.B   080C
@@ -295,7 +293,7 @@ CCS PCD C Compiler, Version 5.015, 5967               05-Nov-18 09:27
 0E8C:  SUB     W0,#7,W5
 0E8E:  MOV     #808,W4
 0E90:  ADD     W5,W4,W6
-0E92:  MOV     812,W0
+0E92:  MOV     814,W0
 0E94:  MOV.B   W0L,[W6+#0]
 .................... 		SM_id++; 
 0E96:  INC.B   080C
@@ -315,7 +313,7 @@ CCS PCD C Compiler, Version 5.015, 5967               05-Nov-18 09:27
 0EAE:  SUB     W0,#9,W5
 0EB0:  MOV     #800,W4
 0EB2:  ADD     W5,W4,W6
-0EB4:  MOV     812,W0
+0EB4:  MOV     814,W0
 0EB6:  MOV.B   W0L,[W6+#0]
 .................... 		SM_id++; 
 0EB8:  INC.B   080C
@@ -335,7 +333,7 @@ CCS PCD C Compiler, Version 5.015, 5967               05-Nov-18 09:27
 0ED0:  SUB     W0,#B,W5
 0ED2:  MOV     #806,W4
 0ED4:  ADD     W5,W4,W6
-0ED6:  MOV     812,W0
+0ED6:  MOV     814,W0
 0ED8:  MOV.B   W0L,[W6+#0]
 .................... 		SM_id++; 
 0EDA:  INC.B   080C
@@ -355,7 +353,7 @@ CCS PCD C Compiler, Version 5.015, 5967               05-Nov-18 09:27
 0EF2:  SUB     W0,#D,W5
 0EF4:  MOV     #80A,W4
 0EF6:  ADD     W5,W4,W6
-0EF8:  MOV     812,W0
+0EF8:  MOV     814,W0
 0EFA:  MOV.B   W0L,[W6+#0]
 .................... 		SM_id++; 
 0EFC:  INC.B   080C
@@ -375,7 +373,7 @@ CCS PCD C Compiler, Version 5.015, 5967               05-Nov-18 09:27
 0F14:  SUB     W0,#D,W5
 0F16:  MOV     #800,W4
 0F18:  ADD     W5,W4,W6
-0F1A:  MOV     812,W0
+0F1A:  MOV     814,W0
 0F1C:  MOV.B   W0L,[W6+#0]
 .................... 		SM_id++; 
 0F1E:  INC.B   080C
@@ -409,12 +407,12 @@ CCS PCD C Compiler, Version 5.015, 5967               05-Nov-18 09:27
 0F46:  BTSS.B  222.0
 0F48:  BRA     F46
 0F4A:  MOV     226,W0
-0F4C:  MOV.B   W0L,810
-0F4E:  CLR.B   811
+0F4C:  MOV.B   W0L,812
+0F4E:  CLR.B   813
 ....................     int c = getc(); 
 ....................     SM_RxD(c); 
-0F50:  PUSH    810
-0F52:  POP     812
+0F50:  PUSH    812
+0F52:  POP     814
 0F54:  CALL    E16
 0F58:  BCLR.B  85.3
 0F5A:  MOV     #1A,W0
@@ -507,103 +505,45 @@ CCS PCD C Compiler, Version 5.015, 5967               05-Nov-18 09:27
 .................... 		if (getPackage >= 1){ 
 10EE:  MOV     80E,W4
 10F0:  CP      W4,#1
-10F2:  BRA     LT,119E
+10F2:  BRA     LT,1126
 .................... 			getPackage = 0; 
 10F4:  CLR     80E
-.................... 			//printf("\ndataFromPIC = %d\n", arraydata[0]); 
-.................... 			//printf("\ndataFromPIC = %d\n", arraydata[1]); 
-.................... 			//printf("\ndataFromPIC = %d\n", arraydata[2]); 
-.................... 			//printf("\ndataFromPIC = %d\n", arraydata[3]); 
-.................... 			//int bagPosX, bagPosY, ; 
-.................... 			//memcpy(&test, arrayDataYII, sizeof(test)); 
+.................... 			int bagPosX;//, bagPosY, goPosX, goPosY ; 
+.................... 			memcpy(&bagPosX, arrayDataXI, sizeof(bagPosX)); 
+10F6:  MOV     #810,W1
+10F8:  MOV     #804,W2
+10FA:  REPEAT  #1
+10FC:  MOV.B   [W2++],[W1++]
 .................... 			//printf("\nresult = %d\n", array[0]); 
-.................... 			//printf("\nresult = %d\n", test);arrayData 
-.................... 			printf("\nresult = %d\n", arrayData[0]); 
-10F6:  MOV     #0,W1
-10F8:  MOV     W1,W0
-10FA:  CLR.B   1
-10FC:  CALL    DFC
-1100:  INC     W1,W1
-1102:  BTSC.B  223.1
-1104:  BRA     1102
-1106:  MOV     W0,224
-1108:  MOV     #9,W0
-110A:  CPSGT   W1,W0
-110C:  BRA     10F8
-110E:  MOV.B   800,W0L
-1110:  SE      W0,W0
-1112:  MOV     #0,W4
-1114:  CALL    F6A
-1118:  BTSC.B  223.1
-111A:  BRA     1118
-111C:  MOV     #A,W4
-111E:  MOV     W4,224
-.................... 			printf("\nresult = %d\n", arrayData[1]); 
-1120:  MOV     #0,W1
-1122:  MOV     W1,W0
-1124:  CLR.B   1
-1126:  CALL    DFC
-112A:  INC     W1,W1
-112C:  BTSC.B  223.1
-112E:  BRA     112C
-1130:  MOV     W0,224
-1132:  MOV     #9,W0
-1134:  CPSGT   W1,W0
-1136:  BRA     1122
-1138:  MOV.B   801,W0L
-113A:  SE      W0,W0
-113C:  MOV     #0,W4
-113E:  CALL    F6A
-1142:  BTSC.B  223.1
-1144:  BRA     1142
-1146:  MOV     #A,W4
-1148:  MOV     W4,224
-.................... 			printf("\nresult = %d\n", arrayData[2]); 
-114A:  MOV     #0,W1
-114C:  MOV     W1,W0
-114E:  CLR.B   1
-1150:  CALL    DFC
-1154:  INC     W1,W1
-1156:  BTSC.B  223.1
-1158:  BRA     1156
-115A:  MOV     W0,224
-115C:  MOV     #9,W0
-115E:  CPSGT   W1,W0
-1160:  BRA     114C
-1162:  MOV.B   802,W0L
-1164:  SE      W0,W0
-1166:  MOV     #0,W4
-1168:  CALL    F6A
-116C:  BTSC.B  223.1
-116E:  BRA     116C
-1170:  MOV     #A,W4
-1172:  MOV     W4,224
-.................... 			printf("\nresult = %d\n", arrayData[3]); 
-1174:  MOV     #0,W1
-1176:  MOV     W1,W0
-1178:  CLR.B   1
-117A:  CALL    DFC
-117E:  INC     W1,W1
-1180:  BTSC.B  223.1
-1182:  BRA     1180
-1184:  MOV     W0,224
-1186:  MOV     #9,W0
-1188:  CPSGT   W1,W0
-118A:  BRA     1176
-118C:  MOV.B   803,W0L
-118E:  SE      W0,W0
-1190:  MOV     #0,W4
-1192:  CALL    F6A
-1196:  BTSC.B  223.1
-1198:  BRA     1196
-119A:  MOV     #A,W4
-119C:  MOV     W4,224
+.................... 			printf("\nresult = %d\n", bagPosX); 
+10FE:  MOV     #0,W1
+1100:  MOV     W1,W0
+1102:  CLR.B   1
+1104:  CALL    DFC
+1108:  INC     W1,W1
+110A:  BTSC.B  223.1
+110C:  BRA     110A
+110E:  MOV     W0,224
+1110:  MOV     #9,W0
+1112:  CPSGT   W1,W0
+1114:  BRA     1100
+1116:  MOV     810,W0
+1118:  MOV     #0,W4
+111A:  CALL    F6A
+111E:  BTSC.B  223.1
+1120:  BRA     111E
+1122:  MOV     #A,W4
+1124:  MOV     W4,224
+.................... 			//printf("\nresult = %d\n", arrayData[0]); 
+.................... 			//printf("\nresult = %d\n", arrayData[1]); 
+.................... 			//printf("\nresult = %d\n", arrayData[2]); 
+.................... 			//printf("\nresult = %d\n", arrayData[3]); 
 .................... 		} 
-119E:  BRA     10EE
+1126:  BRA     10EE
 .................... 	} 
 .................... } 
 ....................  
-11A0:  PWRSAV  #0
+1128:  PWRSAV  #0
 
 Configuration Fuses:
    Word  1L: 3F7F   WPOSTS16 WDT128 WINDIS NOWDT ICSP1 NODEBUG NOWRT NOPROTECT NOJTAG
