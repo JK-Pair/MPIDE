@@ -27,7 +27,7 @@ void SM_RxD(int c){
 			SM_id++;
 		}
 	}else if (SM_id <= 4){
-		if ( c == 0x08){
+		if ( c == 0x06){
 			SM_id++;
 		}
 	}else if (SM_id > 4 && SM_id <= 6){
@@ -36,19 +36,19 @@ void SM_RxD(int c){
 	}else if (SM_id > 6 && SM_id <= 8){
 		arrayDataYI[SM_id - 7] = c;
 		SM_id++;
-	}else if (SM_id > 8 && SM_id <= 10){
+	}else if (SM_id == 9){
 		arrayData[SM_id - 9] = c;
 		SM_id++;
-	}else if (SM_id > 10 && SM_id <= 12){
-		arrayDataXII[SM_id - 11] = c;
+	}else if (SM_id > 9 && SM_id <= 11){
+		arrayDataXII[SM_id - 10] = c;
 		SM_id++;
-	}else if (SM_id > 12 && SM_id <= 14){
-		arrayDataYII[SM_id - 13] = c;
+	}else if (SM_id > 11 && SM_id <= 13){
+		arrayDataYII[SM_id - 12] = c;
 		SM_id++;
-	}else if(SM_id > 14 && SM_id <= 16){
+	}else if(SM_id == 14){
 		arrayData[SM_id - 13] = c;
 		SM_id++;
-	}else if(SM_id > 16){
+	}else if(SM_id >= 15){
 		getPackage = 1;
 		SM_id = 1;
 	}

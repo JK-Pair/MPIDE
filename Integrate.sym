@@ -1,66 +1,120 @@
 W0      @SCRATCH
 W0L     _RETURN_
-W0 -W3  @F64TOSI64.P1
+W0 -W3  @SI64TOF64.P1
 W0 -W1  @READ_ROM_MEMORY.P2
-W0 -W3  @ADDFF64.P3
-W0 -W1  @DIV3232B.P4
-W0      @delay_us1.P5
-W0      @delay_ms1.P6
-W0 -W3  @MULFF64.P7
-W0 -W3  @SI64TOF64.P8
-W0 -W3  @DIVFF64.P9
+W0 -W3  @F64TOSI64.P3
+W0      @delay_us1.P4
+W0 -W1  @DIV3232B.P5
+W0      @PRINTFD16_115200_5725_5724.P6
+W0      @delay_ms1.P7
+W0 -W3  @DIVFF64.P8
+W0 -W3  @MULFF64.P9
 W1      @SCRATCH
-W1      @READ_PACKED_MEMORY.P1
-W1      @WRITE_PACKED_MEMORY.P2
-W2 -W3  @DIV3232B.P1
-W2      @READ_ROM_MEMORY.P2
-W2      @WRITE_PACKED_MEMORY.P3
-W2      @READ_PACKED_MEMORY.P4
-W3      @READ_ROM_MEMORY.P1
-W3      @WRITE_PACKED_MEMORY.P2
-W3      @READ_PACKED_MEMORY.P3
-W4 -W7  @ADDFF64.P1
-W4 -W7  @DIVFF64.P2
-W4 -W7  @MULFF64.P3
+W1      @WRITE_PACKED_MEMORY.P1
+W1      @READ_PACKED_MEMORY.P2
+W2      @WRITE_PACKED_MEMORY.P1
+W2 -W3  @DIV3232B.P2
+W2      @READ_PACKED_MEMORY.P3
+W2      @READ_ROM_MEMORY.P4
+W3      @READ_PACKED_MEMORY.P1
+W3      @READ_ROM_MEMORY.P2
+W3      @WRITE_PACKED_MEMORY.P3
+W4      @PRINTFD16_115200_5725_5724.P1
+W4 -W7  @MULFF64.P2
+W4 -W7  @DIVFF64.P3
 630.6   C1OUT
 630.7   C2OUT
 800-801 countX
 802-803 countY
 804-805 countZ
-806-809 arrayData
-80A-80B arrayDataXI
-80C-80D arrayDataXII
-80E-80F arrayDataYI
-810-811 arrayDataYII
-812     SM_id
-814-815 getPackage
-816-817 MAIN.stateI
-818-819 MAIN.i
-81C-81D UART1_Isr.c
-820-821 SM_RxD.c
+806-80B arrayData
+80C-80D arrayDataXI
+80E-80F arrayDataXII
+810-811 arrayDataYI
+812-813 arrayDataYII
+814     SM_id
+816-817 getPackage
+818-819 MAIN.stateII
+81A-81B MAIN.stateAll
+81C-81D MAIN.i
+81E-81F MAIN.bagPosX
+820-821 MAIN.bagPosY
+822-823 MAIN.goPosX
+824-825 MAIN.goPosY
+82C-82D servo_Top.degress
+82C-82D servo_Under.degress
+82C-82D moveXYZ.x
+82C-82D set_Zero.loop
+82E-82F servo_Top.i
+82E-82F servo_Under.i
+82E-82F moveXYZ.direcX
+82E-82F set_Zero.stateSWII
+830-831 moveXYZ.y
+832-833 set_Z.check
+832-833 moveXYZ.direcY
+834-835 moveXYZ.z
+836-837 moveXYZ.direcZ
+838-839 moveXYZ.loop
+83A-83B moveXYZ.stateSWIII
+848-849 move_posZ.pulse_z
+848-849 move_posY.pulse_y
+848-849 move_posX.pulse_x
+84A-84B move_posY.direc
+84A-84B move_posZ.direc
+84A-84B move_posX.direc
+84C-84D move_posZ.check
+84C-84D move_posX.check
+84C-84D move_posY.check
+84E-84F move_posX.error
+84E-84F move_posZ.error
+84E-84F move_posY.error
+854-855 control_inputZ.input
+854-855 control_inputX.input
+854-855 control_inputY.input
+856-857 control_inputZ.direc
+856-857 control_inputY.direc
+856-857 control_inputX.direc
+87C-87D UART1_Isr.c
+87E-87F SM_RxD.c
 2780-27FF Stack
 
 ROM Allocation:
 000DFC  SM_RxD
-000F1E  UART1_Isr
-000F50  INT_EXT_INPUT0
-000F72  INT_EXT_INPUT1
-000F94  INT_EXT_INPUT2
-000FB6  Init_Interrupts
-000FEE  @delay_ms1
-000FFE  @cinit1
-000FFE  MAIN
-00105E  @cinit2
+000F52  UART1_Isr
+000F84  INT_EXT_INPUT0
+000FA6  INT_EXT_INPUT1
+000FC8  INT_EXT_INPUT2
+000FEA  Init_Interrupts
+001022  @SI64TOF64
+001086  @DIVFF64
+00118E  @MULFF64
+00129E  @F64TOSI64
+0012F4  control_inputY
+00140A  control_inputZ
+001520  set_Z
+001554  control_inputX
+00166A  set_Zero
+0016E6  @PRINTFD16_115200_5725_5724
+0017DC  @delay_ms1
+0017EC  move_posZ
+001832  move_posX
+00187E  move_posY
+0018C4  moveXYZ
+001918  servo_Top
+001938  servo_Under
+001958  MAIN
+001958  @cinit1
+0019B8  @cinit2
 
 Project Directory:
     C:\Users\thipawan\Desktop\Embedded\MilestoneIII\MPIDE\
 
 Project Files:
-    Integrate.c                                             [06-Nov-18 09:27  CRC=DBAA42D7]
+    Integrate.c                                             [11-Nov-18 13:03  CRC=5C954069]
     ..\..\..\..\..\..\Program Files (x86)\PICC\devices\24FJ48GA002.h [12-Nov-13 14:36  CRC=2B092578]
     BL_Support.h                                            [28-Oct-16 04:52  CRC=87294453]
 
-Source signature=1505F0F5
+Source signature=95F0EE87
 
 Units:
     Integrate (main)

@@ -44,7 +44,7 @@ int countX = 0;
 int countY = 0;
 int countZ = 0; 
 
-char arrayData[4] = {};
+char arrayData[6] = {};
 char arrayDataXI[2] = {};
 char arrayDataXII[2] = {};
 char arrayDataYI[2] = {};
@@ -52,7 +52,7 @@ char arrayDataYII[2] = {};
 
 char SM_id = 1;
 int getPackage = 0;
-
+//sendPosToPIC(self, bagPosX, bagDirX, bagPosY, bagDirY, Angle, goPosX, goDirX, goPosY, goDirY, AngGrip)
 void SM_RxD(int c){
 	if (SM_id <= 2){
 		if (c ==  0xFF){
@@ -65,34 +65,34 @@ void SM_RxD(int c){
 			SM_id++;
 		}
 	}else if (SM_id <= 4){
-		if ( c == 0x08){
+		if ( c == 0x06){
 			SM_id++;
 		}
 	}else if (SM_id > 4 && SM_id <= 6){
 		arrayDataXI[SM_id - 5] = c;
 		SM_id++;
-
-	}else if (SM_id > 6 && SM_id <= 8){
-		arrayDataYI[SM_id - 7] = c;
+	}else if (SM_id == 7){
+		arrayData[SM_id - 7] = c;
 		SM_id++;
-
-	}else if (SM_id > 8 && SM_id <= 10){
+	}else if (SM_id > 7 && SM_id <= 9){
+		arrayDataYI[SM_id - 8] = c;
+		SM_id++;
+	}else if (SM_id > 9 && SM_id <= 11){
 		arrayData[SM_id - 9] = c;
 		SM_id++;
-
-	}else if (SM_id > 10 && SM_id <= 12){
-		arrayDataXII[SM_id - 11] = c;
+	}else if (SM_id > 11 && SM_id <= 13){
+		arrayDataXII[SM_id - 12] = c;
 		SM_id++;
-
-	}else if (SM_id > 12 && SM_id <= 14){
-		arrayDataYII[SM_id - 13] = c;
+	}else if (SM_id == 14){
+		arrayData[SM_id - 11] = c;
 		SM_id++;
-
-	}else if(SM_id > 14 && SM_id <= 16){
+	}else if (SM_id > 14 && SM_id <= 16){
+		arrayDataYII[SM_id - 15] = c;
+		SM_id++;
+	}else if (SM_id > 16 && SM_id <= 18){
 		arrayData[SM_id - 13] = c;
 		SM_id++;
-
-	}else if(SM_id > 16){
+	}else if(SM_id > 18){
 		getPackage = 1;
 		SM_id = 1;
 	}
@@ -212,7 +212,7 @@ void move_posX(int pulse_x, int direc){
 	int check = 1;
 	while(check == 1){  
 		int error = pulse_x - countX;
-			error *= 2;
+			error *= 5;
 		//printf("error:%d\n",error);
 		//delay_ms(10);
 
@@ -273,15 +273,17 @@ void set_Zero(void){
 	int stateSWII = 0;
 	while(loop == 1){
 		if(stateSWII == 0){
-			set_Z();
-			stateSWII++;
-		}else if(stateSWII == 1){  
 			if(input(lim_SW_Y) == 1){
 				control_inputY(0,1);
 				stateSWII++;
 			}else if(input(lim_SW_Y) == 0){
 				control_inputY(700,0);
 			}
+		}else if(stateSWII == 1){  
+			set_pwm_duty(4, 90);
+			set_pwm_duty(5, 100);
+			set_Z();
+			stateSWII++;
 		}else if(stateSWII == 2){  
 			if(input(lim_SW_X) == 1){
 				control_inputX(0,0);
@@ -311,6 +313,20 @@ int stateSWIII = 0;
 		}
 	} 
 }	
+
+void servo_Top(int degress){
+	for(int i = 90;i <= degress;i+=5){
+		set_pwm_duty(4, i);
+		delay_ms(100);
+	}
+}
+
+void servo_Under(int degress){
+	for(int i = 100;i <= degress;i+=5){
+		set_pwm_duty(5, i);
+		delay_ms(100);
+	}
+}
 
 #INT_EXT0
 void INT_EXT_INPUT0 (void)
@@ -360,50 +376,61 @@ void main(){
 
 	setup_compare(4, COMPARE_PWM | COMPARE_TIMER2);
 	setup_compare(5, COMPARE_PWM | COMPARE_TIMER2);
-	int stateI = 0;
+	set_Zero();
+	int stateII = 0;
+	int stateAll =0;
 	while(TRUE){
-			//set_pwm_duty(5, 90);//for 5,up is 250,down is 110
-			for(int i=650;i>40;i-=10){
-			set_pwm_duty(4, i);//for 4,up is 650,down is 50
-			//printf("i: %d\n",i);
+			//set_pwm_duty(5, 90);//for 5,up is 250,down is 100 ServoTop
+			//if(stateI == 0){
+			for(int i=600;i>50;i-=5){
+			set_pwm_duty(4, i);//for 4,up is 580,down is 90, center is 330 ServoUnder
+			printf("i: %d\n",i);
 			delay_ms(100);
 			}
-			//delay_ms(20);
-
-
-		//for(int i=0; i < 200;i+=10){
-		//	set_pwm_duty(4, i);
-			//printf("j: %d\n",j);
-		//	delay_ms(1000);
-		//set_Zero();
-		//set_Z(2000);
-		//move_posZ(3000,1);
-		//move_posY(3000,1);
-		//int bagPosX, bagPosY, goPosX, goPosY ;
+			//} z => base is 7680+7680+1536+768 = 17664, groud is 20736, 13824,  3390 top on box
+		int bagPosX, bagPosY, goPosX, goPosY;
 		if (getPackage >= 1){
 			getPackage = 0;
-			if(stateI ==0){
-			//moveXYZ(3000, 1, 3000, 1, 2500, 0);
-			//set_Zero();
-			//control_ServoTop(10, 1);
-			stateI++;
+			memcpy(&bagPosX, arrayDataXI, sizeof(bagPosX));
+			memcpy(&bagPosY, arrayDataYI, sizeof(bagPosY));
+			memcpy(&goPosX, arrayDataXII, sizeof(goPosX));
+			memcpy(&goPosY, arrayDataYII, sizeof(goPosY));
+
+			move_posZ(7680, 1);
+
+			while(stateAll==0){
+				countX = 0;
+				countY = 0;
+				countZ = 0;
+			
+			if(stateII == 0){
+				moveXYZ(bagPosX, arrayData[0], bagPosY, arrayData[1], 3000, 1);
+				servo_Top(330); //arrayData[2]
+				servo_Under(250);
+				delay_ms(3000); 
+				stateII++;
+				
+			}else if(stateII == 1){
+				move_posZ(3000, 1);//To bag
+				servo_Under(100);
+				delay_ms(1000);
+				stateII++;
+				
+			}else if(stateII == 2){
+				move_posZ(768, 0); //3390
+				moveXYZ(goPosX, arrayData[3], goPosY, arrayData[4], 1536, 1);//Z is 20736
+				stateII++;
+			
+			}else if(stateII == 3){
+				servo_Under(250);
+				delay_ms(1000); 
+				stateII++;
+			}else{
+				set_Zero();
+				stateAll++;
+				}
 			}
-			//move_posX(3000,1);
-			//moveXYZ(1000, 1, 1000, 1, 1000, 1);
-			//set_Zero();
-			//moveXYZ(3000, 1, 3000, 1, 1000, 1);	22
-			//memcpy(&bagPosX, arrayDataXI, sizeof(bagPosX));
-			//memcpy(&bagPosY, arrayDataYI, sizeof(bagPosY));
-			//memcpy(&goPosX, arrayDataXII, sizeof(goPosX));
-			//memcpy(&goPosY, arrayDataYII, sizeof(goPosY));
-			//printf("\nresult = %d\n", array[0]);
-			//printf("\nresult = %d\n", bagPosX);
-			//printf("\nresult = %d\n", arrayData[0]);
-			//printf("\nresult = %d\n", arrayData[1]);
-			//printf("\nresult = %d\n", arrayData[2]);
-			//printf("\nresult = %d\n", arrayData[3]);
 		}	
 	}
 }
-
 
