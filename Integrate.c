@@ -44,14 +44,17 @@ int countX = 0;
 int countY = 0;
 int countZ = 0; 
 
-char arrayData[6] = {};
+char arrayData[4] = {};
 char arrayDataXI[2] = {};
 char arrayDataXII[2] = {};
 char arrayDataYI[2] = {};
 char arrayDataYII[2] = {};
+char arrayAng[2] = {};
+char arrayAngGrip[2] = {};
 
 char SM_id = 1;
 int getPackage = 0;
+
 void SM_RxD(int c){
 	if (SM_id <= 2){
 		if (c ==  0xFF){
@@ -68,30 +71,36 @@ void SM_RxD(int c){
 			SM_id++;
 		}
 	}else if (SM_id > 4 && SM_id <= 6){
-		arrayDataXI[SM_id - 5] = c;
+		arrayDataXI[SM_id - 5] = c;  //bagPosX
 		SM_id++;
 	}else if (SM_id == 7){
-		arrayData[SM_id - 7] = c;
+		arrayData[SM_id - 7] = c;	//bagDirX[0]
 		SM_id++;
 	}else if (SM_id > 7 && SM_id <= 9){
-		arrayDataYI[SM_id - 8] = c;
+		arrayDataYI[SM_id - 8] = c; //bagPosY
 		SM_id++;
 	}else if (SM_id > 9 && SM_id <= 11){
-		arrayData[SM_id - 9] = c;
+		arrayData[SM_id - 9] = c;	//bagDirY[1]
 		SM_id++;
 	}else if (SM_id > 11 && SM_id <= 13){
-		arrayDataXII[SM_id - 12] = c;
+		arrayAng[SM_id - 12] = c;	//Angle
 		SM_id++;
-	}else if (SM_id == 14){
-		arrayData[SM_id - 11] = c;
+	}else if (SM_id > 13 && SM_id <= 15){
+		arrayDataXII[SM_id - 14] = c;	//goPosX
 		SM_id++;
-	}else if (SM_id > 14 && SM_id <= 16){
-		arrayDataYII[SM_id - 15] = c;
+	}else if (SM_id == 16){
+		arrayData[SM_id - 14] = c;	//goDirX[2]
 		SM_id++;
 	}else if (SM_id > 16 && SM_id <= 18){
-		arrayData[SM_id - 13] = c;
+		arrayDataYII[SM_id - 15] = c;	//goPosY
 		SM_id++;
-	}else if(SM_id > 18){
+	}else if (SM_id == 19){
+		arrayData[SM_id - 16] = c;		//goDirY[3]
+		SM_id++;
+	}else if (SM_id > 19 && SM_id <= 21){
+		arrayAngGrip[SM_id - 20] = c;	//Angle of Gripper for goPos
+		SM_id++;
+	}else if(SM_id > 22){
 		getPackage = 1;
 		SM_id = 1;
 	}
@@ -389,13 +398,16 @@ void main(){
 			}stateII++;
 			}*/
 			//} z => base is 7680+7680+1536+768 = 17664, groud is 20736, 13824,  3390 top on box
-		int bagPosX, bagPosY, goPosX, goPosY;
+		int bagPosX, bagPosY, angle, goPosX, goPosY, angleGrip;
 		if (getPackage >= 1){
+			
 			getPackage = 0;
 			memcpy(&bagPosX, arrayDataXI, sizeof(bagPosX));
 			memcpy(&bagPosY, arrayDataYI, sizeof(bagPosY));
+			memcpy(&angle, arrayAng, sizeof(angle));
 			memcpy(&goPosX, arrayDataXII, sizeof(goPosX));
 			memcpy(&goPosY, arrayDataYII, sizeof(goPosY));
+			memcpy(&angleGrip, arrayAngGrip, sizeof(angleGrip));
 
 			move_posZ(7680, 1);
 
@@ -406,8 +418,8 @@ void main(){
 			
 			if(stateII == 0){
 				moveXYZ(bagPosX, arrayData[0], bagPosY, arrayData[1], 3000, 1);
-				//servo_Top(300); //arrayData[2]
-				//servo_Under(250);
+				//servo_Top(300); //angle
+				//servo_Under(250);//up tp gu.
 				delay_ms(3000); 
 				stateII++;
 				
@@ -419,7 +431,7 @@ void main(){
 				
 			}else if(stateII == 2){
 				move_posZ(768, 0); //3390
-				moveXYZ(goPosX, arrayData[3], goPosY, arrayData[4], 1536, 1);//Z is 20736
+				moveXYZ(goPosX, arrayData[2], goPosY, arrayData[3], 1536, 1);//Z is 20736
 				stateII++;
 			
 			}else if(stateII == 3){
