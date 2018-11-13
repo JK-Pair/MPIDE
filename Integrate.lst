@@ -1,15 +1,15 @@
-CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
+CCS PCD C Compiler, Version 5.015, 5967               13-Nov-18 20:06
 
                Filename:   C:\Users\thipawan\Desktop\Embedded\MilestoneIII\MPIDE\Integrate.lst
 
-               ROM used:   3884 bytes (11%)
-                           Largest free fragment is 26832
+               ROM used:   3472 bytes (10%)
+                           Largest free fragment is 27244
                RAM used:   151 (2%) at main() level
                            255 (3%) worst case
                Stack size: 128
 
 *
-0C00:  GOTO    1958
+0C00:  GOTO    1822
 *
 0C24:  GOTO    F84
 *
@@ -392,126 +392,6 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 12EE:  MOV     [--W15],[W5--]
 12F0:  MOV     [--W15],W5
 12F2:  RETURN  
-*
-16E6:  MOV     W5,[W15++]
-16E8:  MOV     #C,W5
-16EA:  REPEAT  #3
-16EC:  MOV     [W5++],[W15++]
-16EE:  BTSS    W0.F
-16F0:  BRA     170A
-16F2:  NEG     W0,W0
-16F4:  BSET    W4.8
-16F6:  BTSS    W4.F
-16F8:  BRA     170A
-16FA:  MOV     W0,[W15++]
-16FC:  MOV     #2D,W0
-16FE:  BTSC.B  223.1
-1700:  BRA     16FE
-1702:  MOV     W0,224
-1704:  MOV     [--W15],W0
-1706:  BCLR    W4.8
-1708:  DEC.B   0008
-170A:  CLR     W5
-170C:  MOV     W0,W7
-170E:  MOV     W4,W9
-1710:  BCLR    W4.F
-1712:  CP0.B   W4L
-1714:  BRA     NZ,1722
-1716:  BTSC    W9.F
-1718:  BRA     171E
-171A:  MOV     #0,W5
-171C:  BRA     173C
-171E:  MOV     #0,W5
-1720:  BRA     173C
-1722:  SUB.B   W4L,#6,W5L
-1724:  BRA     NC,173A
-1726:  MOV     #30,W0
-1728:  BTSS    W9.F
-172A:  MOV     #20,W0
-172C:  BTSC.B  223.1
-172E:  BRA     172C
-1730:  MOV     W0,224
-1732:  DEC     W5,W5
-1734:  BRA     NN,172C
-1736:  MOV     #5,W5
-1738:  BRA     173C
-173A:  MOV     W4,W5
-173C:  MOV     #6,W4
-173E:  BTSC    W5.8
-1740:  INC     W4,W4
-1742:  BSET    W5.E
-1744:  BTSC    W9.F
-1746:  BSET    W5.F
-1748:  MOV     #2710,W8
-174A:  REPEAT  #11
-174C:  DIV.U   W7,W8
-174E:  CALL    1792
-1752:  MOV     W1,W7
-1754:  MOV     #3E8,W8
-1756:  REPEAT  #11
-1758:  DIV.U   W7,W8
-175A:  CALL    1792
-175E:  MOV     W1,W7
-1760:  MOV     #64,W8
-1762:  REPEAT  #11
-1764:  DIV.U   W7,W8
-1766:  CALL    1792
-176A:  MOV     W1,W7
-176C:  MOV     #A,W8
-176E:  REPEAT  #11
-1770:  DIV.U   W7,W8
-1772:  CALL    1792
-1776:  BTSS    W9.8
-1778:  BRA     1784
-177A:  MOV     #2D,W0
-177C:  BTSC.B  223.1
-177E:  BRA     177C
-1780:  MOV     W0,224
-1782:  BCLR    W9.8
-1784:  MOV     #30,W0
-1786:  ADD.B   W1L,W0L,W0L
-1788:  MOV     W0,2A
-178A:  BTSC.B  223.1
-178C:  BRA     178A
-178E:  MOV     W0,224
-1790:  BRA     17D2
-1792:  MOV     #30,W6
-1794:  CP0     W0
-1796:  BRA     NZ,17B4
-1798:  BTSS    W5.E
-179A:  BRA     17C8
-179C:  DEC     W4,W4
-179E:  CP.B    W4L,W5L
-17A0:  BRA     Z,17A6
-17A2:  BTSC.B  42.0
-17A4:  RETURN  
-17A6:  CP0     W0
-17A8:  BRA     NZ,17B4
-17AA:  BTSS    W5.E
-17AC:  BRA     17C8
-17AE:  BTSS    W5.F
-17B0:  MOV     #20,W6
-17B2:  BRA     17C8
-17B4:  BCLR    W5.E
-17B6:  BTSS    W9.8
-17B8:  BRA     17C8
-17BA:  MOV     W0,W10
-17BC:  MOV     #2D,W0
-17BE:  BTSC.B  223.1
-17C0:  BRA     17BE
-17C2:  MOV     W0,224
-17C4:  BCLR    W9.8
-17C6:  MOV     W10,W0
-17C8:  ADD.B   W6L,W0L,W0L
-17CA:  BTSC.B  223.1
-17CC:  BRA     17CA
-17CE:  MOV     W0,224
-17D0:  RETURN  
-17D2:  MOV     #12,W5
-17D4:  REPEAT  #3
-17D6:  MOV     [--W15],[W5--]
-17D8:  MOV     [--W15],W5
-17DA:  RETURN  
 ....................  
 .................... #list 
 ....................  
@@ -550,14 +430,15 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 ....................  
 ....................  
 .................... #use delay (internal = 8 MHz, clock = 32MHz) 
-17DC:  CP0     W0
-17DE:  BTSC.B  42.1
-17E0:  BRA     17EA
-17E2:  REPEAT  #3E7B
-17E4:  NOP     
-17E6:  DEC     W0,W0
-17E8:  BRA     NZ,17E2
-17EA:  RETURN  
+*
+1812:  CP0     W0
+1814:  BTSC.B  42.1
+1816:  BRA     1820
+1818:  REPEAT  #3E7B
+181A:  NOP     
+181C:  DEC     W0,W0
+181E:  BRA     NZ,1818
+1820:  RETURN  
 .................... #PIN_SELECT U1RX = PIN_B12 //PIN_B14 // 
 .................... #PIN_SELECT U1TX = PIN_B13 //PIN_B15 // 
 .................... #use rs232 (UART1, BAUD = 115200, XMIT = PIN_B13, RCV = PIN_B12) 
@@ -609,7 +490,6 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 ....................  
 .................... char SM_id = 1; 
 .................... int getPackage = 0; 
-.................... //sendPosToPIC(self, bagPosX, bagDirX, bagPosY, bagDirY, Angle, goPosX, goDirX, goPosY, goDirY, AngGrip) 
 .................... void SM_RxD(int c){ 
 *
 0DFC:  MOV     W5,[W15++]
@@ -865,10 +745,10 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 1558:  MOV     W7,[W15++]
 155A:  MOV     W8,[W15++]
 .................... 	if(direc == 0){ 
-155C:  CP0     856
+155C:  CP0     854
 155E:  BRA     NZ,15DE
 .................... 		if(input >= 743 ){ 
-1560:  MOV     854,W4
+1560:  MOV     852,W4
 1562:  MOV     #2E7,W3
 1564:  CP      W3,W4
 1566:  BRA     GT,1576
@@ -883,11 +763,11 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 1572:  BCLR.B  2C8.1
 .................... 		}else if(input > 0 ){ 
 1574:  BRA     15DC
-1576:  MOV     854,W4
+1576:  MOV     852,W4
 1578:  CP      W4,#0
 157A:  BRA     LE,15D2
 .................... 			set_pwm_duty(1, (int)((input/743.0f)*2000)); 
-157C:  MOV     854,W0
+157C:  MOV     852,W0
 157E:  CLR     W3
 1580:  BTSC    W0.F
 1582:  SETM    W3
@@ -941,11 +821,11 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 .................... 	}	 
 15DC:  BRA     1660
 .................... 	else if(direc == 1){ 
-15DE:  MOV     856,W4
+15DE:  MOV     854,W4
 15E0:  CP      W4,#1
 15E2:  BRA     NZ,1660
 .................... 		if(input >= 743 ){ 
-15E4:  MOV     854,W4
+15E4:  MOV     852,W4
 15E6:  MOV     #2E7,W3
 15E8:  CP      W3,W4
 15EA:  BRA     GT,15FA
@@ -960,11 +840,11 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 15F6:  BCLR.B  2C8.1
 .................... 		}else if(input > 0 ){ 
 15F8:  BRA     1660
-15FA:  MOV     854,W4
+15FA:  MOV     852,W4
 15FC:  CP      W4,#0
 15FE:  BRA     LE,1656
 .................... 			set_pwm_duty(1, (int)((input/743.0f)*2000)); 
-1600:  MOV     854,W0
+1600:  MOV     852,W0
 1602:  CLR     W3
 1604:  BTSC    W0.F
 1606:  SETM    W3
@@ -1032,10 +912,10 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 12FA:  MOV     W8,[W15++]
 .................... 	 
 .................... if(direc == 0){ 
-12FC:  CP0     856
+12FC:  CP0     854
 12FE:  BRA     NZ,137E
 .................... 		if(input >= 743 ){ 
-1300:  MOV     854,W4
+1300:  MOV     852,W4
 1302:  MOV     #2E7,W3
 1304:  CP      W3,W4
 1306:  BRA     GT,1316
@@ -1050,11 +930,11 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 1312:  BCLR.B  2C0.4
 .................... 		}else if(input > 0 ){ 
 1314:  BRA     137C
-1316:  MOV     854,W4
+1316:  MOV     852,W4
 1318:  CP      W4,#0
 131A:  BRA     LE,1372
 .................... 			set_pwm_duty(2, (int)((input/743.0f)*2000)); 
-131C:  MOV     854,W0
+131C:  MOV     852,W0
 131E:  CLR     W3
 1320:  BTSC    W0.F
 1322:  SETM    W3
@@ -1108,11 +988,11 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 .................... 	}	 
 137C:  BRA     1400
 .................... 	else if(direc == 1){ 
-137E:  MOV     856,W4
+137E:  MOV     854,W4
 1380:  CP      W4,#1
 1382:  BRA     NZ,1400
 .................... 		if(input >= 743 ){ 
-1384:  MOV     854,W4
+1384:  MOV     852,W4
 1386:  MOV     #2E7,W3
 1388:  CP      W3,W4
 138A:  BRA     GT,139A
@@ -1127,11 +1007,11 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 1396:  BCLR.B  2C0.4
 .................... 		}else if(input > 0 ){ 
 1398:  BRA     1400
-139A:  MOV     854,W4
+139A:  MOV     852,W4
 139C:  CP      W4,#0
 139E:  BRA     LE,13F6
 .................... 			set_pwm_duty(2, (int)((input/743.0f)*2000)); 
-13A0:  MOV     854,W0
+13A0:  MOV     852,W0
 13A2:  CLR     W3
 13A4:  BTSC    W0.F
 13A6:  SETM    W3
@@ -1197,10 +1077,10 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 140E:  MOV     W7,[W15++]
 1410:  MOV     W8,[W15++]
 .................... 	if(direc == 0){ 
-1412:  CP0     856
+1412:  CP0     854
 1414:  BRA     NZ,1494
 .................... 		if(input >= 743 ){ 
-1416:  MOV     854,W4
+1416:  MOV     852,W4
 1418:  MOV     #2E7,W3
 141A:  CP      W3,W4
 141C:  BRA     GT,142C
@@ -1215,11 +1095,11 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 1428:  BCLR.B  2C0.1
 .................... 		}else if(input > 0 ){ 
 142A:  BRA     1492
-142C:  MOV     854,W4
+142C:  MOV     852,W4
 142E:  CP      W4,#0
 1430:  BRA     LE,1488
 .................... 			set_pwm_duty(3, (int)((input/743.0f)*2000)); 
-1432:  MOV     854,W0
+1432:  MOV     852,W0
 1434:  CLR     W3
 1436:  BTSC    W0.F
 1438:  SETM    W3
@@ -1273,11 +1153,11 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 .................... 	}	 
 1492:  BRA     1516
 .................... 	else if(direc == 1){ 
-1494:  MOV     856,W4
+1494:  MOV     854,W4
 1496:  CP      W4,#1
 1498:  BRA     NZ,1516
 .................... 		if(input >= 743 ){ 
-149A:  MOV     854,W4
+149A:  MOV     852,W4
 149C:  MOV     #2E7,W3
 149E:  CP      W3,W4
 14A0:  BRA     GT,14B0
@@ -1292,11 +1172,11 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 14AC:  BCLR.B  2C0.1
 .................... 		}else if(input > 0 ){ 
 14AE:  BRA     1516
-14B0:  MOV     854,W4
+14B0:  MOV     852,W4
 14B2:  CP      W4,#0
 14B4:  BRA     LE,150C
 .................... 			set_pwm_duty(3, (int)((input/743.0f)*2000)); 
-14B6:  MOV     854,W0
+14B6:  MOV     852,W0
 14B8:  CLR     W3
 14BA:  BTSC    W0.F
 14BC:  SETM    W3
@@ -1358,152 +1238,152 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 ....................  
 .................... void move_posX(int pulse_x, int direc){ 
 *
-1832:  MOV     W5,[W15++]
-1834:  MOV     #1,W4
-1836:  MOV     W4,84C
+172C:  MOV     W5,[W15++]
+172E:  MOV     #1,W4
+1730:  MOV     W4,84A
 .................... 	int check = 1; 
 .................... 	while(check == 1){   
-1838:  MOV     84C,W4
-183A:  CP      W4,#1
-183C:  BRA     NZ,187A
+1732:  MOV     84A,W4
+1734:  CP      W4,#1
+1736:  BRA     NZ,1774
 .................... 		int error = pulse_x - countX; 
-183E:  MOV     848,W4
-1840:  MOV     800,W3
-1842:  SUB     W4,W3,W0
-1844:  MOV     W0,84E
+1738:  MOV     846,W4
+173A:  MOV     800,W3
+173C:  SUB     W4,W3,W0
+173E:  MOV     W0,84C
 .................... 			error *= 5; 
-1846:  MOV     84E,W4
-1848:  MUL.UU  W4,#5,W0
-184A:  MOV     W0,84E
+1740:  MOV     84C,W4
+1742:  MUL.UU  W4,#5,W0
+1744:  MOV     W0,84C
 .................... 		//printf("error:%d\n",error); 
 .................... 		//delay_ms(10); 
 ....................  
 .................... 		if(abs(error) <= tolerance){ 
-184C:  MOV     84E,W0
-184E:  BTSS    W0.F
-1850:  BRA     1858
-1852:  MOV     #0,W4
-1854:  MOV     84E,W3
-1856:  SUB     W4,W3,W0
-1858:  MOV     W0,W5
-185A:  CP      W5,#1E
-185C:  BRA     GT,186C
+1746:  MOV     84C,W0
+1748:  BTSS    W0.F
+174A:  BRA     1752
+174C:  MOV     #0,W4
+174E:  MOV     84C,W3
+1750:  SUB     W4,W3,W0
+1752:  MOV     W0,W5
+1754:  CP      W5,#1E
+1756:  BRA     GT,1766
 .................... 			control_inputX(0,direc); 
-185E:  CLR     854
-1860:  PUSH    84A
-1862:  POP     856
-1864:  CALL    1554
+1758:  CLR     852
+175A:  PUSH    848
+175C:  POP     854
+175E:  CALL    1554
 .................... 			check = 0;	 
-1868:  CLR     84C
+1762:  CLR     84A
 .................... 		}else{ 
-186A:  BRA     1878
+1764:  BRA     1772
 .................... 			control_inputX(error, direc);  
-186C:  PUSH    84E
-186E:  POP     854
-1870:  PUSH    84A
-1872:  POP     856
-1874:  CALL    1554
+1766:  PUSH    84C
+1768:  POP     852
+176A:  PUSH    848
+176C:  POP     854
+176E:  CALL    1554
 .................... 			 
 .................... 			 
 .................... 		} 
-1878:  BRA     1838
+1772:  BRA     1732
 .................... 	} 
-187A:  MOV     [--W15],W5
-187C:  RETURN  
+1774:  MOV     [--W15],W5
+1776:  RETURN  
 .................... } 
 ....................  
 .................... void move_posY(int pulse_y, int direc){ 
-187E:  MOV     W5,[W15++]
-1880:  MOV     #1,W4
-1882:  MOV     W4,84C
+1778:  MOV     W5,[W15++]
+177A:  MOV     #1,W4
+177C:  MOV     W4,84A
 .................... 	int check = 1; 
 .................... 	while(check == 1){ 
-1884:  MOV     84C,W4
-1886:  CP      W4,#1
-1888:  BRA     NZ,18C0
+177E:  MOV     84A,W4
+1780:  CP      W4,#1
+1782:  BRA     NZ,17BA
 .................... 		int error = pulse_y - countY; 
-188A:  MOV     848,W4
-188C:  MOV     802,W3
-188E:  SUB     W4,W3,W0
-1890:  MOV     W0,84E
+1784:  MOV     846,W4
+1786:  MOV     802,W3
+1788:  SUB     W4,W3,W0
+178A:  MOV     W0,84C
 .................... 		if(abs(error) <= tolerance){ 
-1892:  MOV     84E,W0
-1894:  BTSS    W0.F
-1896:  BRA     189E
-1898:  MOV     #0,W4
-189A:  MOV     84E,W3
-189C:  SUB     W4,W3,W0
-189E:  MOV     W0,W5
-18A0:  CP      W5,#1E
-18A2:  BRA     GT,18B2
+178C:  MOV     84C,W0
+178E:  BTSS    W0.F
+1790:  BRA     1798
+1792:  MOV     #0,W4
+1794:  MOV     84C,W3
+1796:  SUB     W4,W3,W0
+1798:  MOV     W0,W5
+179A:  CP      W5,#1E
+179C:  BRA     GT,17AC
 .................... 			control_inputY(0, direc); 
-18A4:  CLR     854
-18A6:  PUSH    84A
-18A8:  POP     856
-18AA:  CALL    12F4
+179E:  CLR     852
+17A0:  PUSH    848
+17A2:  POP     854
+17A4:  CALL    12F4
 .................... 			check = 0;	 
-18AE:  CLR     84C
+17A8:  CLR     84A
 .................... 		}else{ 
-18B0:  BRA     18BE
+17AA:  BRA     17B8
 .................... 			control_inputY(error, direc);  
-18B2:  PUSH    84E
-18B4:  POP     854
-18B6:  PUSH    84A
-18B8:  POP     856
-18BA:  CALL    12F4
+17AC:  PUSH    84C
+17AE:  POP     852
+17B0:  PUSH    848
+17B2:  POP     854
+17B4:  CALL    12F4
 .................... 		} 
-18BE:  BRA     1884
+17B8:  BRA     177E
 .................... 	} 
-18C0:  MOV     [--W15],W5
-18C2:  RETURN  
+17BA:  MOV     [--W15],W5
+17BC:  RETURN  
 .................... } 
 ....................  
 ....................  
 .................... void move_posZ(int pulse_z, int direc){ 
 *
-17EC:  MOV     W5,[W15++]
-17EE:  MOV     #1,W4
-17F0:  MOV     W4,84C
+16E6:  MOV     W5,[W15++]
+16E8:  MOV     #1,W4
+16EA:  MOV     W4,84A
 .................... 	int check = 1; 
 .................... 	while(check == 1){ 
-17F2:  MOV     84C,W4
-17F4:  CP      W4,#1
-17F6:  BRA     NZ,182E
+16EC:  MOV     84A,W4
+16EE:  CP      W4,#1
+16F0:  BRA     NZ,1728
 .................... 	int error = pulse_z - countZ; 
-17F8:  MOV     848,W4
-17FA:  MOV     804,W3
-17FC:  SUB     W4,W3,W0
-17FE:  MOV     W0,84E
+16F2:  MOV     846,W4
+16F4:  MOV     804,W3
+16F6:  SUB     W4,W3,W0
+16F8:  MOV     W0,84C
 .................... 		if(abs(error) <= tolerance){ 
-1800:  MOV     84E,W0
-1802:  BTSS    W0.F
-1804:  BRA     180C
-1806:  MOV     #0,W4
-1808:  MOV     84E,W3
-180A:  SUB     W4,W3,W0
-180C:  MOV     W0,W5
-180E:  CP      W5,#1E
-1810:  BRA     GT,1820
+16FA:  MOV     84C,W0
+16FC:  BTSS    W0.F
+16FE:  BRA     1706
+1700:  MOV     #0,W4
+1702:  MOV     84C,W3
+1704:  SUB     W4,W3,W0
+1706:  MOV     W0,W5
+1708:  CP      W5,#1E
+170A:  BRA     GT,171A
 .................... 			control_inputZ(0, direc);	 
-1812:  CLR     854
-1814:  PUSH    84A
-1816:  POP     856
-1818:  CALL    140A
+170C:  CLR     852
+170E:  PUSH    848
+1710:  POP     854
+1712:  CALL    140A
 .................... 			check = 0; 
-181C:  CLR     84C
+1716:  CLR     84A
 .................... 		}else{ 
-181E:  BRA     182C
+1718:  BRA     1726
 .................... 			control_inputZ(error, direc); 
-1820:  PUSH    84E
-1822:  POP     854
-1824:  PUSH    84A
-1826:  POP     856
-1828:  CALL    140A
+171A:  PUSH    84C
+171C:  POP     852
+171E:  PUSH    848
+1720:  POP     854
+1722:  CALL    140A
 .................... 		}  
-182C:  BRA     17F2
+1726:  BRA     16EC
 .................... 	} 
-182E:  MOV     [--W15],W5
-1830:  RETURN  
+1728:  MOV     [--W15],W5
+172A:  RETURN  
 .................... } 
 ....................  
 ....................  
@@ -1511,10 +1391,10 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 *
 1520:  MOV     W5,[W15++]
 1522:  MOV     #1,W4
-1524:  MOV     W4,832
+1524:  MOV     W4,830
 .................... 	int check = 1; 
 .................... 	while(check == 1){  
-1526:  MOV     832,W4
+1526:  MOV     830,W4
 1528:  CP      W4,#1
 152A:  BRA     NZ,1550
 .................... 		if(input(lim_SW_Z) == 1){ 
@@ -1522,11 +1402,11 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 152E:  BTSS.B  2CA.5
 1530:  BRA     153E
 .................... 			control_inputZ(0, 0); 
-1532:  CLR     854
-1534:  CLR     856
+1532:  CLR     852
+1534:  CLR     854
 1536:  CALL    140A
 .................... 			check = 0; 
-153A:  CLR     832
+153A:  CLR     830
 .................... 		}else if(input(lim_SW_Z) == 0){ 
 153C:  BRA     154E
 153E:  BSET.B  2C8.5
@@ -1534,8 +1414,8 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 1542:  BRA     154E
 .................... 			control_inputZ(700, 0); 
 1544:  MOV     #2BC,W4
-1546:  MOV     W4,854
-1548:  CLR     856
+1546:  MOV     W4,852
+1548:  CLR     854
 154A:  CALL    140A
 .................... 		} 
 154E:  BRA     1526
@@ -1549,28 +1429,28 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 *
 166A:  MOV     W5,[W15++]
 166C:  MOV     #1,W4
-166E:  MOV     W4,82C
-1670:  CLR     82E
+166E:  MOV     W4,82A
+1670:  CLR     82C
 .................... 	int loop = 1; 
 .................... 	int stateSWII = 0; 
 .................... 	while(loop == 1){ 
-1672:  MOV     82C,W4
+1672:  MOV     82A,W4
 1674:  CP      W4,#1
 1676:  BRA     NZ,16E2
 .................... 		if(stateSWII == 0){ 
-1678:  CP0     82E
+1678:  CP0     82C
 167A:  BRA     NZ,16A2
 .................... 			if(input(lim_SW_Y) == 1){ 
 167C:  BSET.B  2C8.4
 167E:  BTSS.B  2CA.4
 1680:  BRA     1690
 .................... 				control_inputY(0,1); 
-1682:  CLR     854
+1682:  CLR     852
 1684:  MOV     #1,W4
-1686:  MOV     W4,856
+1686:  MOV     W4,854
 1688:  CALL    12F4
 .................... 				stateSWII++; 
-168C:  INC     082E
+168C:  INC     082C
 .................... 			}else if(input(lim_SW_Y) == 0){ 
 168E:  BRA     16A0
 1690:  BSET.B  2C8.4
@@ -1578,28 +1458,28 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 1694:  BRA     16A0
 .................... 				control_inputY(700,0); 
 1696:  MOV     #2BC,W4
-1698:  MOV     W4,854
-169A:  CLR     856
+1698:  MOV     W4,852
+169A:  CLR     854
 169C:  CALL    12F4
 .................... 			} 
 .................... 		}else if(stateSWII == 1){   
 16A0:  BRA     16E0
-16A2:  MOV     82E,W4
+16A2:  MOV     82C,W4
 16A4:  CP      W4,#1
 16A6:  BRA     NZ,16B8
 .................... 			set_pwm_duty(4, 90); 
 16A8:  MOV     #5A,W4
 16AA:  MOV     W4,192
-.................... 			set_pwm_duty(5, 100); 
-16AC:  MOV     #64,W4
+.................... 			set_pwm_duty(5, 150); 
+16AC:  MOV     #96,W4
 16AE:  MOV     W4,198
 .................... 			set_Z(); 
 16B0:  CALL    1520
 .................... 			stateSWII++; 
-16B4:  INC     082E
+16B4:  INC     082C
 .................... 		}else if(stateSWII == 2){   
 16B6:  BRA     16E0
-16B8:  MOV     82E,W4
+16B8:  MOV     82C,W4
 16BA:  CP      W4,#2
 16BC:  BRA     NZ,16E0
 .................... 			if(input(lim_SW_X) == 1){ 
@@ -1607,11 +1487,11 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 16C0:  BTSS.B  2CB.6
 16C2:  BRA     16D0
 .................... 				control_inputX(0,0); 
-16C4:  CLR     854
-16C6:  CLR     856
+16C4:  CLR     852
+16C6:  CLR     854
 16C8:  CALL    1554
 .................... 				loop=0; 
-16CC:  CLR     82C
+16CC:  CLR     82A
 .................... 			}else if(input(lim_SW_X) == 0){ 
 16CE:  BRA     16E0
 16D0:  BSET.B  2C9.6
@@ -1619,8 +1499,8 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 16D4:  BRA     16E0
 .................... 				control_inputX(700,0); 
 16D6:  MOV     #2BC,W4
-16D8:  MOV     W4,854
-16DA:  CLR     856
+16D8:  MOV     W4,852
+16DA:  CLR     854
 16DC:  CALL    1554
 .................... 			} 
 .................... 		} 
@@ -1632,105 +1512,75 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 ....................  
 .................... void moveXYZ(int x, int direcX, int y, int direcY, int z, int direcZ){ 
 *
-18C4:  MOV     #1,W4
-18C6:  MOV     W4,838
-18C8:  CLR     83A
+17BE:  MOV     #1,W4
+17C0:  MOV     W4,836
+17C2:  CLR     838
 ....................  
 .................... int loop = 1; 
 .................... int stateSWIII = 0; 
 .................... 	while(loop == 1){ 
-18CA:  MOV     838,W4
-18CC:  CP      W4,#1
-18CE:  BRA     NZ,1916
+17C4:  MOV     836,W4
+17C6:  CP      W4,#1
+17C8:  BRA     NZ,1810
 .................... 		if(stateSWIII == 0){ 
-18D0:  CP0     83A
-18D2:  BRA     NZ,18E6
+17CA:  CP0     838
+17CC:  BRA     NZ,17E0
 .................... 			move_posX(x, direcX); 
-18D4:  PUSH    82C
-18D6:  POP     848
-18D8:  PUSH    82E
-18DA:  POP     84A
-18DC:  CALL    1832
+17CE:  PUSH    82A
+17D0:  POP     846
+17D2:  PUSH    82C
+17D4:  POP     848
+17D6:  CALL    172C
 .................... 			stateSWIII = 1; 
-18E0:  MOV     #1,W4
-18E2:  MOV     W4,83A
+17DA:  MOV     #1,W4
+17DC:  MOV     W4,838
 .................... 		}else if(stateSWIII == 1){   
-18E4:  BRA     1914
-18E6:  MOV     83A,W4
-18E8:  CP      W4,#1
-18EA:  BRA     NZ,18FE
+17DE:  BRA     180E
+17E0:  MOV     838,W4
+17E2:  CP      W4,#1
+17E4:  BRA     NZ,17F8
 .................... 			move_posY(y, direcY); 
-18EC:  PUSH    830
-18EE:  POP     848
-18F0:  PUSH    832
-18F2:  POP     84A
-18F4:  CALL    187E
+17E6:  PUSH    82E
+17E8:  POP     846
+17EA:  PUSH    830
+17EC:  POP     848
+17EE:  CALL    1778
 .................... 			stateSWIII = 2; 
-18F8:  MOV     #2,W4
-18FA:  MOV     W4,83A
+17F2:  MOV     #2,W4
+17F4:  MOV     W4,838
 .................... 		}else if(stateSWIII == 2){   
-18FC:  BRA     1914
-18FE:  MOV     83A,W4
-1900:  CP      W4,#2
-1902:  BRA     NZ,1914
+17F6:  BRA     180E
+17F8:  MOV     838,W4
+17FA:  CP      W4,#2
+17FC:  BRA     NZ,180E
 .................... 			move_posZ(z, direcZ); 
-1904:  PUSH    834
-1906:  POP     848
-1908:  PUSH    836
-190A:  POP     84A
-190C:  CALL    17EC
+17FE:  PUSH    832
+1800:  POP     846
+1802:  PUSH    834
+1804:  POP     848
+1806:  CALL    16E6
 .................... 			stateSWIII = 0; 
-1910:  CLR     83A
+180A:  CLR     838
 .................... 			loop = 0; 
-1912:  CLR     838
+180C:  CLR     836
 .................... 		} 
-1914:  BRA     18CA
+180E:  BRA     17C4
 .................... 	}  
-1916:  RETURN  
+1810:  RETURN  
 .................... }	 
 ....................  
 .................... void servo_Top(int degress){ 
 .................... 	for(int i = 90;i <= degress;i+=5){ 
-1918:  MOV     #5A,W4
-191A:  MOV     W4,82E
-191C:  MOV     82E,W0
-191E:  MOV     82C,W4
-1920:  CP      W4,W0
-1922:  BRA     LT,1936
 .................... 		set_pwm_duty(4, i); 
-1924:  PUSH    82E
-1926:  POP     192
 .................... 		delay_ms(100); 
-1928:  MOV     #64,W0
-192A:  CALL    17DC
-192E:  MOV     82E,W4
-1930:  ADD     W4,#5,W4
-1932:  MOV     W4,82E
-1934:  BRA     191C
 .................... 	} 
-1936:  RETURN  
 .................... } 
 ....................  
 .................... void servo_Under(int degress){ 
 .................... 	for(int i = 100;i <= degress;i+=5){ 
-1938:  MOV     #64,W4
-193A:  MOV     W4,82E
-193C:  MOV     82E,W0
-193E:  MOV     82C,W4
-1940:  CP      W4,W0
-1942:  BRA     LT,1956
 .................... 		set_pwm_duty(5, i); 
-1944:  PUSH    82E
-1946:  POP     198
 .................... 		delay_ms(100); 
-1948:  MOV     #64,W0
-194A:  CALL    17DC
-194E:  MOV     82E,W4
-1950:  ADD     W4,#5,W4
-1952:  MOV     W4,82E
-1954:  BRA     193C
 .................... 	} 
-1956:  RETURN  
 .................... } 
 ....................  
 .................... #INT_EXT0 
@@ -1854,289 +1704,246 @@ CCS PCD C Compiler, Version 5.015, 5967               11-Nov-18 13:03
 ....................  
 .................... void main(){ 
 *
-1958:  MOV     #2780,W15
-195A:  MOV     #27FF,W0
-195C:  MOV     W0,20
-195E:  NOP     
-1960:  MOV     #4444,W0
-1962:  MOV     W0,A8
-1964:  BSET.B  81.7
-1966:  MOV     #46,W0
-1968:  MOV.B   W0L,742
-196A:  MOV     #57,W0
-196C:  MOV.B   W0L,742
-196E:  BCLR.B  742.6
-1970:  MOV     #63F,W0
-1972:  MOV     W0,680
-1974:  MOV     #3F03,W0
-1976:  MOV     W0,682
-1978:  MOV     #3F0C,W0
-197A:  MOV     W0,6A4
-197C:  MOV     #12,W0
-197E:  MOV     W0,6C2
-1980:  MOV     #1315,W0
-1982:  MOV     W0,6C8
-1984:  MOV     #14,W0
-1986:  MOV     W0,6CA
-1988:  MOV     #300,W0
-198A:  MOV     W0,6CC
-198C:  MOV     #1600,W0
-198E:  MOV     W0,6CE
-1990:  MOV     #46,W0
-1992:  MOV.B   W0L,742
-1994:  MOV     #57,W0
-1996:  MOV.B   W0L,742
-1998:  BSET.B  742.6
-199A:  CLR     744
-199C:  MOV     #8000,W4
-199E:  MOV     W4,220
-19A0:  MOV     #400,W4
-19A2:  MOV     W4,222
-19A4:  BSET.B  220.3
-19A6:  MOV     #22,W4
-19A8:  MOV     W4,228
-19AA:  CLR     800
-19AC:  CLR     802
-19AE:  CLR     804
-19B0:  MOV.B   #1,W0L
-19B2:  MOV.B   W0L,814
-19B4:  CLR     816
-19B6:  SETM    32C
-19B8:  CLR     806
-19BA:  CLR     808
-19BC:  CLR     80A
-19BE:  CLR     80C
-19C0:  CLR     80E
-19C2:  CLR     810
-19C4:  CLR     812
+1822:  MOV     #2780,W15
+1824:  MOV     #27FF,W0
+1826:  MOV     W0,20
+1828:  NOP     
+182A:  MOV     #4444,W0
+182C:  MOV     W0,A8
+182E:  BSET.B  81.7
+1830:  MOV     #46,W0
+1832:  MOV.B   W0L,742
+1834:  MOV     #57,W0
+1836:  MOV.B   W0L,742
+1838:  BCLR.B  742.6
+183A:  MOV     #63F,W0
+183C:  MOV     W0,680
+183E:  MOV     #3F03,W0
+1840:  MOV     W0,682
+1842:  MOV     #3F0C,W0
+1844:  MOV     W0,6A4
+1846:  MOV     #12,W0
+1848:  MOV     W0,6C2
+184A:  MOV     #1315,W0
+184C:  MOV     W0,6C8
+184E:  MOV     #14,W0
+1850:  MOV     W0,6CA
+1852:  MOV     #300,W0
+1854:  MOV     W0,6CC
+1856:  MOV     #1600,W0
+1858:  MOV     W0,6CE
+185A:  MOV     #46,W0
+185C:  MOV.B   W0L,742
+185E:  MOV     #57,W0
+1860:  MOV.B   W0L,742
+1862:  BSET.B  742.6
+1864:  CLR     744
+1866:  MOV     #8000,W4
+1868:  MOV     W4,220
+186A:  MOV     #400,W4
+186C:  MOV     W4,222
+186E:  BSET.B  220.3
+1870:  MOV     #22,W4
+1872:  MOV     W4,228
+1874:  CLR     800
+1876:  CLR     802
+1878:  CLR     804
+187A:  MOV.B   #1,W0L
+187C:  MOV.B   W0L,814
+187E:  CLR     816
+1880:  SETM    32C
+1882:  CLR     806
+1884:  CLR     808
+1886:  CLR     80A
+1888:  CLR     80C
+188A:  CLR     80E
+188C:  CLR     810
+188E:  CLR     812
 .................... 	Init_Interrupts(); 
-19C6:  CALL    FEA
+1890:  CALL    FEA
 ....................  
 .................... 	setup_compare(1, COMPARE_PWM | COMPARE_TIMER3); 
-19CA:  MOV     #E,W4
-19CC:  MOV     W4,184
+1894:  MOV     #E,W4
+1896:  MOV     W4,184
 .................... 	setup_compare(2, COMPARE_PWM | COMPARE_TIMER3); 
-19CE:  MOV     #E,W4
-19D0:  MOV     W4,18A
+1898:  MOV     #E,W4
+189A:  MOV     W4,18A
 .................... 	setup_compare(3, COMPARE_PWM | COMPARE_TIMER3); 
-19D2:  MOV     #E,W4
-19D4:  MOV     W4,190
+189C:  MOV     #E,W4
+189E:  MOV     W4,190
 ....................  
 .................... 	setup_compare(4, COMPARE_PWM | COMPARE_TIMER2); 
-19D6:  MOV     #6,W4
-19D8:  MOV     W4,196
+18A0:  MOV     #6,W4
+18A2:  MOV     W4,196
 .................... 	setup_compare(5, COMPARE_PWM | COMPARE_TIMER2); 
-19DA:  MOV     #6,W4
-19DC:  MOV     W4,19C
+18A4:  MOV     #6,W4
+18A6:  MOV     W4,19C
 .................... 	set_Zero(); 
-19DE:  CALL    166A
+18A8:  CALL    166A
 .................... 	int stateII = 0; 
 .................... 	int stateAll =0; 
-19E2:  CLR     818
-19E4:  CLR     81A
+18AC:  CLR     818
+18AE:  CLR     81A
 .................... 	while(TRUE){ 
 .................... 			//set_pwm_duty(5, 90);//for 5,up is 250,down is 100 ServoTop 
 .................... 			//if(stateI == 0){ 
-.................... 			for(int i=600;i>50;i-=5){ 
-19E6:  MOV     #258,W4
-19E8:  MOV     W4,81C
-19EA:  MOV     81C,W4
-19EC:  MOV     #32,W3
-19EE:  CP      W3,W4
-19F0:  BRA     GE,1A2C
-.................... 			set_pwm_duty(4, i);//for 4,up is 580,down is 90, center is 330 ServoUnder 
-19F2:  PUSH    81C
-19F4:  POP     192
+.................... 			/*if(stateII ==0){ 
+.................... 			for(int i=600;i>0;i-=10){ 
+.................... 			set_pwm_duty(4, i);//for 4,up is 580,down is 80, center is 330 ServoUnder 
 .................... 			printf("i: %d\n",i); 
-19F6:  BTSC.B  223.1
-19F8:  BRA     19F6
-19FA:  MOV     #69,W4
-19FC:  MOV     W4,224
-19FE:  BTSC.B  223.1
-1A00:  BRA     19FE
-1A02:  MOV     #3A,W4
-1A04:  MOV     W4,224
-1A06:  BTSC.B  223.1
-1A08:  BRA     1A06
-1A0A:  MOV     #20,W4
-1A0C:  MOV     W4,224
-1A0E:  MOV     81C,W0
-1A10:  MOV     #0,W4
-1A12:  CALL    16E6
-1A16:  BTSC.B  223.1
-1A18:  BRA     1A16
-1A1A:  MOV     #A,W4
-1A1C:  MOV     W4,224
-.................... 			delay_ms(100); 
-1A1E:  MOV     #64,W0
-1A20:  CALL    17DC
-1A24:  MOV     81C,W4
-1A26:  SUB     W4,#5,W0
-1A28:  MOV     W0,81C
-1A2A:  BRA     19EA
-.................... 			} 
+.................... 			delay_ms(1000); 
+.................... 			}stateII++; 
+.................... 			}*/ 
 .................... 			//} z => base is 7680+7680+1536+768 = 17664, groud is 20736, 13824,  3390 top on box 
 .................... 		int bagPosX, bagPosY, goPosX, goPosY; 
 .................... 		if (getPackage >= 1){ 
-1A2C:  MOV     816,W4
-1A2E:  CP      W4,#1
-1A30:  BRA     LT,1B28
+18B0:  MOV     816,W4
+18B2:  CP      W4,#1
+18B4:  BRA     LT,198C
 .................... 			getPackage = 0; 
-1A32:  CLR     816
+18B6:  CLR     816
 .................... 			memcpy(&bagPosX, arrayDataXI, sizeof(bagPosX)); 
-1A34:  MOV     #81E,W1
-1A36:  MOV     #80C,W2
-1A38:  REPEAT  #1
-1A3A:  MOV.B   [W2++],[W1++]
+18B8:  MOV     #81C,W1
+18BA:  MOV     #80C,W2
+18BC:  REPEAT  #1
+18BE:  MOV.B   [W2++],[W1++]
 .................... 			memcpy(&bagPosY, arrayDataYI, sizeof(bagPosY)); 
-1A3C:  MOV     #820,W1
-1A3E:  MOV     #810,W2
-1A40:  REPEAT  #1
-1A42:  MOV.B   [W2++],[W1++]
+18C0:  MOV     #81E,W1
+18C2:  MOV     #810,W2
+18C4:  REPEAT  #1
+18C6:  MOV.B   [W2++],[W1++]
 .................... 			memcpy(&goPosX, arrayDataXII, sizeof(goPosX)); 
-1A44:  MOV     #822,W1
-1A46:  MOV     #80E,W2
-1A48:  REPEAT  #1
-1A4A:  MOV.B   [W2++],[W1++]
+18C8:  MOV     #820,W1
+18CA:  MOV     #80E,W2
+18CC:  REPEAT  #1
+18CE:  MOV.B   [W2++],[W1++]
 .................... 			memcpy(&goPosY, arrayDataYII, sizeof(goPosY)); 
-1A4C:  MOV     #824,W1
-1A4E:  MOV     #812,W2
-1A50:  REPEAT  #1
-1A52:  MOV.B   [W2++],[W1++]
+18D0:  MOV     #822,W1
+18D2:  MOV     #812,W2
+18D4:  REPEAT  #1
+18D6:  MOV.B   [W2++],[W1++]
 ....................  
 .................... 			move_posZ(7680, 1); 
-1A54:  MOV     #1E00,W4
-1A56:  MOV     W4,848
-1A58:  MOV     #1,W4
-1A5A:  MOV     W4,84A
-1A5C:  CALL    17EC
+18D8:  MOV     #1E00,W4
+18DA:  MOV     W4,846
+18DC:  MOV     #1,W4
+18DE:  MOV     W4,848
+18E0:  CALL    16E6
 ....................  
 .................... 			while(stateAll==0){ 
-1A60:  CP0     81A
-1A62:  BRA     NZ,1B28
+18E4:  CP0     81A
+18E6:  BRA     NZ,198C
 .................... 				countX = 0; 
-1A64:  CLR     800
+18E8:  CLR     800
 .................... 				countY = 0; 
-1A66:  CLR     802
+18EA:  CLR     802
 .................... 				countZ = 0; 
-1A68:  CLR     804
+18EC:  CLR     804
 .................... 			 
 .................... 			if(stateII == 0){ 
-1A6A:  CP0     818
-1A6C:  BRA     NZ,1AAC
+18EE:  CP0     818
+18F0:  BRA     NZ,1920
 .................... 				moveXYZ(bagPosX, arrayData[0], bagPosY, arrayData[1], 3000, 1); 
-1A6E:  MOV.B   806,W0L
-1A70:  MOV.B   W0L,8
-1A72:  SE      W4,W3
-1A74:  MOV     W3,82E
-1A76:  MOV.B   807,W0L
-1A78:  MOV.B   W0L,W3L
-1A7A:  SE      W3,W2
-1A7C:  MOV     W2,832
-1A7E:  PUSH    81E
-1A80:  POP     82C
-1A82:  PUSH    820
-1A84:  POP     830
-1A86:  MOV     #BB8,W2
-1A88:  MOV     W2,834
-1A8A:  MOV     #1,W2
-1A8C:  MOV     W2,836
-1A8E:  CALL    18C4
-.................... 				servo_Top(330); //arrayData[2] 
-1A92:  MOV     #14A,W4
-1A94:  MOV     W4,82C
-1A96:  CALL    1918
-.................... 				servo_Under(250); 
-1A9A:  MOV     #FA,W4
-1A9C:  MOV     W4,82C
-1A9E:  CALL    1938
+18F2:  MOV.B   806,W0L
+18F4:  MOV.B   W0L,8
+18F6:  SE      W4,W3
+18F8:  MOV     W3,82C
+18FA:  MOV.B   807,W0L
+18FC:  MOV.B   W0L,W3L
+18FE:  SE      W3,W2
+1900:  MOV     W2,830
+1902:  PUSH    81C
+1904:  POP     82A
+1906:  PUSH    81E
+1908:  POP     82E
+190A:  MOV     #BB8,W2
+190C:  MOV     W2,832
+190E:  MOV     #1,W2
+1910:  MOV     W2,834
+1912:  CALL    17BE
+.................... 				//servo_Top(300); //arrayData[2] 
+.................... 				//servo_Under(250); 
 .................... 				delay_ms(3000);  
-1AA2:  MOV     #BB8,W0
-1AA4:  CALL    17DC
+1916:  MOV     #BB8,W0
+1918:  CALL    1812
 .................... 				stateII++; 
-1AA8:  INC     0818
+191C:  INC     0818
 .................... 				 
 .................... 			}else if(stateII == 1){ 
-1AAA:  BRA     1B26
-1AAC:  MOV     818,W4
-1AAE:  CP      W4,#1
-1AB0:  BRA     NZ,1AD0
+191E:  BRA     198A
+1920:  MOV     818,W4
+1922:  CP      W4,#1
+1924:  BRA     NZ,193C
 .................... 				move_posZ(3000, 1);//To bag 
-1AB2:  MOV     #BB8,W4
-1AB4:  MOV     W4,848
-1AB6:  MOV     #1,W4
-1AB8:  MOV     W4,84A
-1ABA:  CALL    17EC
-.................... 				servo_Under(100); 
-1ABE:  MOV     #64,W4
-1AC0:  MOV     W4,82C
-1AC2:  CALL    1938
+1926:  MOV     #BB8,W4
+1928:  MOV     W4,846
+192A:  MOV     #1,W4
+192C:  MOV     W4,848
+192E:  CALL    16E6
+.................... 				//servo_Under(100); 
 .................... 				delay_ms(1000); 
-1AC6:  MOV     #3E8,W0
-1AC8:  CALL    17DC
+1932:  MOV     #3E8,W0
+1934:  CALL    1812
 .................... 				stateII++; 
-1ACC:  INC     0818
+1938:  INC     0818
 .................... 				 
 .................... 			}else if(stateII == 2){ 
-1ACE:  BRA     1B26
-1AD0:  MOV     818,W4
-1AD2:  CP      W4,#2
-1AD4:  BRA     NZ,1B08
+193A:  BRA     198A
+193C:  MOV     818,W4
+193E:  CP      W4,#2
+1940:  BRA     NZ,1974
 .................... 				move_posZ(768, 0); //3390 
-1AD6:  MOV     #300,W4
-1AD8:  MOV     W4,848
-1ADA:  CLR     84A
-1ADC:  CALL    17EC
+1942:  MOV     #300,W4
+1944:  MOV     W4,846
+1946:  CLR     848
+1948:  CALL    16E6
 .................... 				moveXYZ(goPosX, arrayData[3], goPosY, arrayData[4], 1536, 1);//Z is 20736 
-1AE0:  MOV.B   809,W0L
-1AE2:  MOV.B   W0L,W4L
-1AE4:  SE      W4,W3
-1AE6:  MOV     W3,82E
-1AE8:  MOV.B   80A,W0L
-1AEA:  MOV.B   W0L,6
-1AEC:  SE      W3,W2
-1AEE:  MOV     W2,832
-1AF0:  PUSH    822
-1AF2:  POP     82C
-1AF4:  PUSH    824
-1AF6:  POP     830
-1AF8:  MOV     #600,W2
-1AFA:  MOV     W2,834
-1AFC:  MOV     #1,W2
-1AFE:  MOV     W2,836
-1B00:  CALL    18C4
+194C:  MOV.B   809,W0L
+194E:  MOV.B   W0L,W4L
+1950:  SE      W4,W3
+1952:  MOV     W3,82C
+1954:  MOV.B   80A,W0L
+1956:  MOV.B   W0L,6
+1958:  SE      W3,W2
+195A:  MOV     W2,830
+195C:  PUSH    820
+195E:  POP     82A
+1960:  PUSH    822
+1962:  POP     82E
+1964:  MOV     #600,W2
+1966:  MOV     W2,832
+1968:  MOV     #1,W2
+196A:  MOV     W2,834
+196C:  CALL    17BE
 .................... 				stateII++; 
-1B04:  INC     0818
+1970:  INC     0818
 .................... 			 
 .................... 			}else if(stateII == 3){ 
-1B06:  BRA     1B26
-1B08:  MOV     818,W4
-1B0A:  CP      W4,#3
-1B0C:  BRA     NZ,1B20
-.................... 				servo_Under(250); 
-1B0E:  MOV     #FA,W4
-1B10:  MOV     W4,82C
-1B12:  CALL    1938
+1972:  BRA     198A
+1974:  MOV     818,W4
+1976:  CP      W4,#3
+1978:  BRA     NZ,1984
+.................... 				//servo_Under(250); 
 .................... 				delay_ms(1000);  
-1B16:  MOV     #3E8,W0
-1B18:  CALL    17DC
+197A:  MOV     #3E8,W0
+197C:  CALL    1812
 .................... 				stateII++; 
-1B1C:  INC     0818
+1980:  INC     0818
 .................... 			}else{ 
-1B1E:  BRA     1B26
+1982:  BRA     198A
 .................... 				set_Zero(); 
-1B20:  CALL    166A
+1984:  CALL    166A
 .................... 				stateAll++; 
-1B24:  INC     081A
+1988:  INC     081A
 .................... 				} 
-1B26:  BRA     1A60
+198A:  BRA     18E4
 .................... 			} 
 .................... 		}	 
-1B28:  BRA     19E6
+198C:  BRA     18B0
 .................... 	} 
 .................... } 
 ....................  
-1B2A:  PWRSAV  #0
+198E:  PWRSAV  #0
 
 Configuration Fuses:
    Word  1L: 3F7F   WPOSTS16 WDT128 WINDIS NOWDT ICSP1 NODEBUG NOWRT NOPROTECT NOJTAG

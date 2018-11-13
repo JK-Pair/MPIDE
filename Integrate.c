@@ -52,7 +52,6 @@ char arrayDataYII[2] = {};
 
 char SM_id = 1;
 int getPackage = 0;
-//sendPosToPIC(self, bagPosX, bagDirX, bagPosY, bagDirY, Angle, goPosX, goDirX, goPosY, goDirY, AngGrip)
 void SM_RxD(int c){
 	if (SM_id <= 2){
 		if (c ==  0xFF){
@@ -281,7 +280,7 @@ void set_Zero(void){
 			}
 		}else if(stateSWII == 1){  
 			set_pwm_duty(4, 90);
-			set_pwm_duty(5, 100);
+			set_pwm_duty(5, 150);
 			set_Z();
 			stateSWII++;
 		}else if(stateSWII == 2){  
@@ -382,11 +381,13 @@ void main(){
 	while(TRUE){
 			//set_pwm_duty(5, 90);//for 5,up is 250,down is 100 ServoTop
 			//if(stateI == 0){
-			for(int i=600;i>50;i-=5){
-			set_pwm_duty(4, i);//for 4,up is 580,down is 90, center is 330 ServoUnder
+			/*if(stateII ==0){
+			for(int i=600;i>0;i-=10){
+			set_pwm_duty(4, i);//for 4,up is 580,down is 80, center is 330 ServoUnder
 			printf("i: %d\n",i);
-			delay_ms(100);
-			}
+			delay_ms(1000);
+			}stateII++;
+			}*/
 			//} z => base is 7680+7680+1536+768 = 17664, groud is 20736, 13824,  3390 top on box
 		int bagPosX, bagPosY, goPosX, goPosY;
 		if (getPackage >= 1){
@@ -405,14 +406,14 @@ void main(){
 			
 			if(stateII == 0){
 				moveXYZ(bagPosX, arrayData[0], bagPosY, arrayData[1], 3000, 1);
-				servo_Top(330); //arrayData[2]
-				servo_Under(250);
+				//servo_Top(300); //arrayData[2]
+				//servo_Under(250);
 				delay_ms(3000); 
 				stateII++;
 				
 			}else if(stateII == 1){
 				move_posZ(3000, 1);//To bag
-				servo_Under(100);
+				//servo_Under(100);
 				delay_ms(1000);
 				stateII++;
 				
@@ -422,7 +423,7 @@ void main(){
 				stateII++;
 			
 			}else if(stateII == 3){
-				servo_Under(250);
+				//servo_Under(250);
 				delay_ms(1000); 
 				stateII++;
 			}else{
