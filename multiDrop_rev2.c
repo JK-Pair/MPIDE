@@ -6,15 +6,16 @@
 #use rs232 (UART1, BAUD = 115200, XMIT = PIN_B13, RCV = PIN_B12)
 
 
-char arrayData[4] = {};
+char arrayData[6] = {};
 char arrayDataXI[2] = {};
 char arrayDataXII[2] = {};
 char arrayDataYI[2] = {};
 char arrayDataYII[2] = {};
+char arrayAng[2] = {};
+char arrayAngGrip[2] = {};
 
 char SM_id = 1;
 int getPackage = 0;
-
 void SM_RxD(int c){
 	if (SM_id <= 2){
 		if (c ==  0xFF){
@@ -31,26 +32,40 @@ void SM_RxD(int c){
 			SM_id++;
 		}
 	}else if (SM_id > 4 && SM_id <= 6){
-		arrayDataXI[SM_id - 5] = c;
+		arrayDataXI[SM_id - 5] = c; //PosX
 		SM_id++;
-	}else if (SM_id > 6 && SM_id <= 8){
-		arrayDataYI[SM_id - 7] = c;
+	}else if (SM_id == 7){
+		arrayData[SM_id - 7] = c;	//DirPosX[0]
 		SM_id++;
-	}else if (SM_id == 9){
-		arrayData[SM_id - 9] = c;
+	}else if (SM_id > 7 && SM_id <= 9){
+		arrayDataYI[SM_id - 8] = c;	//PosY
 		SM_id++;
-	}else if (SM_id > 9 && SM_id <= 11){
-		arrayDataXII[SM_id - 10] = c;
+	}else if (SM_id == 10){
+		arrayData[SM_id - 9] = c;	//DirPosY[1]
 		SM_id++;
-	}else if (SM_id > 11 && SM_id <= 13){
-		arrayDataYII[SM_id - 12] = c;
+	}else if (SM_id > 10 && SM_id <= 12){
+		arrayAng[SM_id - 11] = c;	//Ang
 		SM_id++;
-	}else if(SM_id == 14){
-		arrayData[SM_id - 13] = c;
+	}else if (SM_id > 12 && SM_id <= 14){
+		arrayDataXII[SM_id - 13] = c;//goX
 		SM_id++;
-	}else if(SM_id >= 15){
-		getPackage = 1;
-		SM_id = 1;
+	}else if (SM_id == 15){
+		arrayData[SM_id - 13] = c;	//goDir[2]
+		SM_id++;
+	}else if (SM_id > 15 && SM_id <= 17){
+		arrayDataYII[SM_id - 16] = c;	//goY
+		SM_id++;
+	}else if (SM_id == 18){
+		arrayData[SM_id - 15] = c;	//goDir[3]
+		SM_id++;
+	}else if (SM_id > 18 && SM_id <= 20){
+		arrayAngGrip[SM_id - 19] = c;//Anggrip
+		SM_id++;
+		if(SM_id >= 21){
+			printf("%d\n",SM_id);
+			getPackage = 1;
+			SM_id = 1;
+		}
 	}
 }
 
@@ -64,9 +79,9 @@ void main(){
 	
     clear_interrupt(INT_RDA);   // recommend style coding to confirm everything clear before use
     enable_interrupts(INT_RDA);
-    printf("\nresult = %d\n", arrayData[3]);
 	enable_interrupts(GLOBAL);
 	while(TRUE){
+		
 		if (getPackage >= 1){
 			getPackage = 0;
 			int bagPosX;//, bagPosY, goPosX, goPosY ;

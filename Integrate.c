@@ -44,7 +44,7 @@ int countX = 0;
 int countY = 0;
 int countZ = 0; 
 
-char arrayData[4] = {};
+char arrayData[6] = {};
 char arrayDataXI[2] = {};
 char arrayDataXII[2] = {};
 char arrayDataYI[2] = {};
@@ -54,7 +54,6 @@ char arrayAngGrip[2] = {};
 
 char SM_id = 1;
 int getPackage = 0;
-
 void SM_RxD(int c){
 	if (SM_id <= 2){
 		if (c ==  0xFF){
@@ -71,41 +70,41 @@ void SM_RxD(int c){
 			SM_id++;
 		}
 	}else if (SM_id > 4 && SM_id <= 6){
-		arrayDataXI[SM_id - 5] = c;  //bagPosX
+		arrayDataXI[SM_id - 5] = c; //PosX
 		SM_id++;
 	}else if (SM_id == 7){
-		arrayData[SM_id - 7] = c;	//bagDirX[0]
+		arrayData[SM_id - 7] = c;	//DirPosX[0]
 		SM_id++;
 	}else if (SM_id > 7 && SM_id <= 9){
-		arrayDataYI[SM_id - 8] = c; //bagPosY
+		arrayDataYI[SM_id - 8] = c;	//PosY
 		SM_id++;
-	}else if (SM_id > 9 && SM_id <= 11){
-		arrayData[SM_id - 9] = c;	//bagDirY[1]
+	}else if (SM_id == 10){
+		arrayData[SM_id - 9] = c;	//DirPosY[1]
 		SM_id++;
-	}else if (SM_id > 11 && SM_id <= 13){
-		arrayAng[SM_id - 12] = c;	//Angle
+	}else if (SM_id > 10 && SM_id <= 12){
+		arrayAng[SM_id - 11] = c;	//Ang
 		SM_id++;
-	}else if (SM_id > 13 && SM_id <= 15){
-		arrayDataXII[SM_id - 14] = c;	//goPosX
+	}else if (SM_id > 12 && SM_id <= 14){
+		arrayDataXII[SM_id - 13] = c;//goX
 		SM_id++;
-	}else if (SM_id == 16){
-		arrayData[SM_id - 14] = c;	//goDirX[2]
+	}else if (SM_id == 15){
+		arrayData[SM_id - 13] = c;	//goDir[2]
 		SM_id++;
-	}else if (SM_id > 16 && SM_id <= 18){
-		arrayDataYII[SM_id - 15] = c;	//goPosY
+	}else if (SM_id > 15 && SM_id <= 17){
+		arrayDataYII[SM_id - 16] = c;	//goY
 		SM_id++;
-	}else if (SM_id == 19){
-		arrayData[SM_id - 16] = c;		//goDirY[3]
+	}else if (SM_id == 18){
+		arrayData[SM_id - 15] = c;	//goDir[3]
 		SM_id++;
-	}else if (SM_id > 19 && SM_id <= 21){
-		arrayAngGrip[SM_id - 20] = c;	//Angle of Gripper for goPos
+	}else if (SM_id > 18 && SM_id <= 20){
+		arrayAngGrip[SM_id - 19] = c;//Anggrip
 		SM_id++;
-	}else if(SM_id > 22){
-		getPackage = 1;
-		SM_id = 1;
+		if(SM_id >= 21){
+			getPackage = 1;
+			SM_id = 1;
+		}
 	}
 }
-
 
 #INT_RDA               // receive data interrupt one time per one 
 void UART1_Isr() {
@@ -384,7 +383,7 @@ void main(){
 
 	setup_compare(4, COMPARE_PWM | COMPARE_TIMER2);
 	setup_compare(5, COMPARE_PWM | COMPARE_TIMER2);
-	set_Zero();
+	//set_Zero();
 	int stateII = 0;
 	int stateAll =0;
 	while(TRUE){
@@ -400,7 +399,6 @@ void main(){
 			//} z => base is 7680+7680+1536+768 = 17664, groud is 20736, 13824,  3390 top on box
 		int bagPosX, bagPosY, angle, goPosX, goPosY, angleGrip;
 		if (getPackage >= 1){
-			
 			getPackage = 0;
 			memcpy(&bagPosX, arrayDataXI, sizeof(bagPosX));
 			memcpy(&bagPosY, arrayDataYI, sizeof(bagPosY));
@@ -408,10 +406,13 @@ void main(){
 			memcpy(&goPosX, arrayDataXII, sizeof(goPosX));
 			memcpy(&goPosY, arrayDataYII, sizeof(goPosY));
 			memcpy(&angleGrip, arrayAngGrip, sizeof(angleGrip));
+			printf("\n[0] = %d\n", arrayData[0]);
+			printf("\n[1] = %d\n", arrayData[1]);
+			printf("\n[2] = %d\n", arrayData[2]);
+			printf("\n[3] = %d\n", arrayData[3]);
+			//move_posZ(7680, 1);
 
-			move_posZ(7680, 1);
-
-			while(stateAll==0){
+			while(stateAll==10){
 				countX = 0;
 				countY = 0;
 				countZ = 0;
