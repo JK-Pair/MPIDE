@@ -1,8 +1,0 @@
-ÀÄmultiDrop_rev2
-   ÃÄMAIN  0/166  Ram=0
-   ³  ÃÄ@cinit1  (Inline)  Ram=0
-   ³  ÃÄ@const768  0/26  Ram=0
-   ³  ÀÄ@PRINTFD16_115200_5725_5724  0/246  Ram=0
-   ÀÄUART1_Isr  0/50  Ram=2
-      ÀÄSM_RxD  0/410  Ram=7
-         ÀÄ@PRINTFD16_115200_5725_5724  0/246  Ram=0
