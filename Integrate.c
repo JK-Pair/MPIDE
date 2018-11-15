@@ -223,7 +223,7 @@ void move_posX(int pulse_x, int direc){
 	int check = 1;
 	while(check == 1){  
 		int error = pulse_x - countX;
-			error *= 5;
+			error *= 6;
 		//printf("error:%d\n",error);
 		//delay_ms(10);
 
@@ -243,6 +243,7 @@ void move_posY(int pulse_y, int direc){
 	int check = 1;
 	while(check == 1){
 		int error = pulse_y - countY;
+			error *= 2;
 		if(abs(error) <= tolerance){
 			control_inputY(0, direc);
 			check = 0;	
@@ -327,16 +328,14 @@ int stateSWIII = 0;
 }	
 
 void servo_Top(int degress){
-	for(int i = 60;i < degress;i+=5){
-		if(degress < 580){
-			set_pwm_duty(4, i);
-			delay_ms(50);
-		}
+	for(int i = 60;i <= degress;i+=5){
+		set_pwm_duty(4, i);
+		delay_ms(50);
 	}
 }
 
 void servo_Under(int degress){
-	for(int i = 100;i < degress;i+=5){
+	for(int i = 90;i <= degress;i+=5){
 		set_pwm_duty(5, i);
 		delay_ms(50);
 	}
@@ -397,13 +396,14 @@ void main(){
 			//servo_Top(550 );
 			//set_pwm_duty(5, 90);//for 5,up is 250,down is 100 ServoTop
 			//if(stateI == 0){
-			if(stateII <=5){
-				for(int i=100;i<250;i+=5){
+			/*if(stateII <=5){
+				servo_Top(580);
+				for(int i=90;i<250;i+=5){
 				set_pwm_duty(5 ,i);//for 4,up is 550,down is 100, center is 330 ServoUnder
 				printf("i: %d\n",i);
 				delay_ms(50);
 				}stateII++;
-			}*/
+		*/
 			//} z => base is 7680+7680+1536+768 = 17664, groud is 20736, 13824,  3390 top on box
 		int bagPosX, bagPosY, angle, goPosX, goPosY, angleGrip;
 		if (getPackage >= 1){
@@ -437,7 +437,8 @@ void main(){
 				
 			}else if(stateII == 2){
 				move_posZ(1600, 0); //3390
-				moveXYZ(goPosX, arrayData[2], goPosY, arrayData[3], 5500, 1);//Z is 20736
+				moveXYZ(goPosX, arrayData[2], goPosY, arrayData[3], 4500, 1);//Z is 20736
+				delay_ms(500);
 				stateII++;
 			
 			}else if(stateII == 3){
