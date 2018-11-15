@@ -81,17 +81,18 @@ void main(){
     enable_interrupts(INT_RDA);
 	enable_interrupts(GLOBAL);
 	while(TRUE){
-		
+		int bagPosX, bagPosY, angle, goPosX, goPosY, angleGrip;
 		if (getPackage >= 1){
 			getPackage = 0;
-			int bagPosX;//, bagPosY, goPosX, goPosY ;
 			memcpy(&bagPosX, arrayDataXI, sizeof(bagPosX));
-			//printf("\nresult = %d\n", array[0]);
-			printf("\nresult = %d\n", bagPosX);
-			//printf("\nresult = %d\n", arrayData[0]);
-			//printf("\nresult = %d\n", arrayData[1]);
-			//printf("\nresult = %d\n", arrayData[2]);
-			//printf("\nresult = %d\n", arrayData[3]);
+			memcpy(&bagPosY, arrayDataYI, sizeof(bagPosY));
+			memcpy(&angle, arrayAng, sizeof(angle));
+			memcpy(&goPosX, arrayDataXII, sizeof(goPosX));
+			memcpy(&goPosY, arrayDataYII, sizeof(goPosY));
+			memcpy(&angleGrip, arrayAngGrip, sizeof(angleGrip));
+
+			move_posZ(7680, 1);
+			moveXYZ(bagPosX, arrayData[0], bagPosY, arrayData[1], 3000, 1);
 		}
 	}
 }

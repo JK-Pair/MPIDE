@@ -64,10 +64,14 @@ void SM_RxD(int c){
 	}else if (SM_id <= 3){
 		if (c == 0x02){
 			SM_id++;
+		}else{
+			SM_id = 1;
 		}
 	}else if (SM_id <= 4){
 		if ( c == 0x06){
 			SM_id++;
+		}else{
+			SM_id = 1;
 		}
 	}else if (SM_id > 4 && SM_id <= 6){
 		arrayDataXI[SM_id - 5] = c; //PosX
@@ -228,6 +232,7 @@ void move_posX(int pulse_x, int direc){
 			check = 0;	
 		}else{
 			control_inputX(error, direc); 
+
 			
 			
 		}
@@ -287,8 +292,8 @@ void set_Zero(void){
 				control_inputY(700,0);
 			}
 		}else if(stateSWII == 1){  
-			set_pwm_duty(4, 90);
-			set_pwm_duty(5, 150);
+			set_pwm_duty(4, 100);
+			set_pwm_duty(5, 100);
 			set_Z();
 			stateSWII++;
 		}else if(stateSWII == 2){  
@@ -322,16 +327,18 @@ int stateSWIII = 0;
 }	
 
 void servo_Top(int degress){
-	for(int i = 90;i <= degress;i+=5){
-		set_pwm_duty(4, i);
-		delay_ms(100);
+	for(int i = 60;i < degress;i+=5){
+		if(degress < 580){
+			set_pwm_duty(4, i);
+			delay_ms(50);
+		}
 	}
 }
 
 void servo_Under(int degress){
-	for(int i = 100;i <= degress;i+=5){
+	for(int i = 100;i < degress;i+=5){
 		set_pwm_duty(5, i);
-		delay_ms(100);
+		delay_ms(50);
 	}
 }
 
@@ -383,18 +390,19 @@ void main(){
 
 	setup_compare(4, COMPARE_PWM | COMPARE_TIMER2);
 	setup_compare(5, COMPARE_PWM | COMPARE_TIMER2);
-	//set_Zero();
+	set_Zero();
 	int stateII = 0;
 	int stateAll =0;
 	while(TRUE){
+			//servo_Top(550 );
 			//set_pwm_duty(5, 90);//for 5,up is 250,down is 100 ServoTop
 			//if(stateI == 0){
-			/*if(stateII ==0){
-			for(int i=600;i>0;i-=10){
-			set_pwm_duty(4, i);//for 4,up is 580,down is 80, center is 330 ServoUnder
-			printf("i: %d\n",i);
-			delay_ms(1000);
-			}stateII++;
+			if(stateII <=5){
+				for(int i=100;i<250;i+=5){
+				set_pwm_duty(5 ,i);//for 4,up is 550,down is 100, center is 330 ServoUnder
+				printf("i: %d\n",i);
+				delay_ms(50);
+				}stateII++;
 			}*/
 			//} z => base is 7680+7680+1536+768 = 17664, groud is 20736, 13824,  3390 top on box
 		int bagPosX, bagPosY, angle, goPosX, goPosY, angleGrip;
@@ -406,38 +414,36 @@ void main(){
 			memcpy(&goPosX, arrayDataXII, sizeof(goPosX));
 			memcpy(&goPosY, arrayDataYII, sizeof(goPosY));
 			memcpy(&angleGrip, arrayAngGrip, sizeof(angleGrip));
-			printf("\n[0] = %d\n", arrayData[0]);
-			printf("\n[1] = %d\n", arrayData[1]);
-			printf("\n[2] = %d\n", arrayData[2]);
-			printf("\n[3] = %d\n", arrayData[3]);
-			//move_posZ(7680, 1);
 
-			while(stateAll==10){
+			move_posZ(7680, 1);
+
+			while(stateAll==0){
 				countX = 0;
 				countY = 0;
 				countZ = 0;
 			
 			if(stateII == 0){
 				moveXYZ(bagPosX, arrayData[0], bagPosY, arrayData[1], 3000, 1);
-				//servo_Top(300); //angle
-				//servo_Under(250);//up tp gu.
+				servo_Top(330); //angle
+				servo_Under(220);//up tp gu.
 				delay_ms(3000); 
 				stateII++;
 				
 			}else if(stateII == 1){
-				move_posZ(3000, 1);//To bag
-				//servo_Under(100);
+				move_posZ(4700, 1);//To bag
+				servo_Under(100);
 				delay_ms(1000);
 				stateII++;
 				
 			}else if(stateII == 2){
-				move_posZ(768, 0); //3390
-				moveXYZ(goPosX, arrayData[2], goPosY, arrayData[3], 1536, 1);//Z is 20736
+				move_posZ(1600, 0); //3390
+				moveXYZ(goPosX, arrayData[2], goPosY, arrayData[3], 5500, 1);//Z is 20736
 				stateII++;
 			
 			}else if(stateII == 3){
-				//servo_Under(250);
+				servo_Under(150);
 				delay_ms(1000); 
+				move_posZ(7680, 0);
 				stateII++;
 			}else{
 				set_Zero();
