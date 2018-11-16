@@ -243,7 +243,7 @@ void move_posY(int pulse_y, int direc){
 	int check = 1;
 	while(check == 1){
 		int error = pulse_y - countY;
-			error *= 2;
+			error *= 3.5;
 		if(abs(error) <= tolerance){
 			control_inputY(0, direc);
 			check = 0;	
@@ -295,7 +295,9 @@ void set_Zero(void){
 			}
 		}else if(stateSWII == 1){  
 			set_pwm_duty(4, 145);
+			delay_ms(1000);
 			set_pwm_duty(5, 100);
+			delay_ms(1000);
 			set_Z();
 			stateSWII++;
 		}else if(stateSWII == 2){  
@@ -329,16 +331,31 @@ int stateSWIII = 0;
 }	
 
 void servo_Top(int degress){
-	for(int i = 140;i <= degress;i++){
-		set_pwm_duty(4, i);
-		delay_ms(20);
+	if(degress < 350){
+		degress += 3;
+		for(int i = 140;i <= degress;i++){
+			set_pwm_duty(4, i);
+			delay_ms(20);
+		}
+	}else{
+		for(int i = 140;i <= degress;i++){
+			set_pwm_duty(4, i);
+			delay_ms(20);
+		}	
 	}
 }
 
-void servo_Under(int degress){
-	for(int i = 90;i <= degress;i++){
-		set_pwm_duty(5, i);
-		delay_ms(20);
+void servo_Under(int degress, int time){
+	if(time == 0){
+		for(int i = 90;i <= degress;i++){
+			set_pwm_duty(5, i);
+			delay_ms(20);
+		}	
+	}else if(time == 1){
+		for(int i = 90;i <= degress;i++){
+			set_pwm_duty(5, i);
+			delay_ms(100);
+		}
 	}
 }
 
@@ -400,14 +417,14 @@ void main(){
 			countY = 0;
 			countZ = 0;
 			//set_pwm_duty(5, 90);//for 5,up is 250,down is 100 ServoTop
-			/*if(stateII <=5){
+			/*if(stateII ==0){
  				set_pwm_duty(4, 560);//for 4,up is 580,down is 80, center is 330 ServoUnder
  				delay_ms(5000);
 				set_pwm_duty(4, 350);
 				delay_ms(5000);
-				set_pwm_duty(4, 140);
+				set_pwm_duty(4, 145);
 				delay_ms(5000);
- 			}stateII++;*/
+ 				}stateII++;*/
 			//} z => base is 7680+7680+1536+768 = 17664, groud is 20736, 13824,  3390 top on box
 		int bagPosX, bagPosY, angle, goPosX, goPosY, angleGrip;
 		if (getPackage >= 1){
@@ -428,30 +445,29 @@ void main(){
 			if(stateII == 0){
 				moveXYZ(bagPosX, arrayData[0], bagPosY, arrayData[1], 2300, 1);
 				servo_Top(angle); //angle
-				servo_Under(220);//up tp gu.
-				delay_ms(3000); 
+				servo_Under(220, 0);//up tp gu.
+				delay_ms(1000); 
 				stateII++;
 				
 			}else if(stateII == 1){
 				move_posZ(6400, 1);//To bag
-				servo_Under(100);
+				servo_Under(100, 0);
 				delay_ms(1000);
 				stateII++;
 				
 			}else if(stateII == 2){
 				move_posZ(2800, 0); //3390
-				delay_ms(3000);
 				servo_Top(angleGrip);
-				delay_ms(3000);
+				delay_ms(1000);
 				stateII++;
 			
 			}else if(stateII == 3){
-				moveXYZ(goPosX, arrayData[2], goPosY, arrayData[3], 6500, 1);//Z is 20736
+				moveXYZ(goPosX, arrayData[2], goPosY, arrayData[3], 1000, 1);//6500, 5000, 3500, 1000
 				delay_ms(500);
 				stateII++;
 
 			}else if(stateII == 4){
-				servo_Under(200);
+				servo_Under(200, 0);
 				delay_ms(1000); 
 				move_posZ(9000, 0);
 				stateII++;
