@@ -1,3 +1,4 @@
-      Memory usage:   ROM=4%      RAM=2% - 2%
-      0 Errors,  0 Warnings.
-Build Successful.
+*** Error 12 "multiDrop_rev2.c" Line 94(10,11): Undefined identifier  -- move_posZ
+*** Error 12 "multiDrop_rev2.c" Line 95(8,9): Undefined identifier  -- moveXYZ
+      2 Errors,  0 Warnings.
+Build Failed.
