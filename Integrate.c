@@ -223,7 +223,7 @@ void move_posX(int pulse_x, int direc){
 	int check = 1;
 	while(check == 1){  
 		int error = pulse_x - countX;
-			error *= 6;
+			error *= 4;
 		//printf("error:%d\n",error);
 		//delay_ms(10);
 
@@ -232,8 +232,6 @@ void move_posX(int pulse_x, int direc){
 			check = 0;	
 		}else{
 			control_inputX(error, direc); 
-
-			
 			
 		}
 	}
@@ -243,7 +241,7 @@ void move_posY(int pulse_y, int direc){
 	int check = 1;
 	while(check == 1){
 		int error = pulse_y - countY;
-			error *= 5;
+			error *= 7;
 		if(abs(error) <= tolerance){
 			control_inputY(0, direc);
 			check = 0;	
@@ -333,21 +331,16 @@ int stateSWIII = 0;
 void servo_Top(int degress){
 	if(degress <= 200){
 		degress += 5;
-		for(int i = 140;i <= degress;i++){
-			set_pwm_duty(4, i);
-			delay_ms(20);
-		}
+		set_pwm_duty(4, degress);
+		delay_ms(20);
 	}else if(degress > 200 && degress < 350){
 		degress -= 20;
-		for(int i = 200;i <= degress;i++){
-			set_pwm_duty(4, i);
-			delay_ms(20);
-		}
+		set_pwm_duty(4, degress);
+		delay_ms(20);
 	}else if(degress >= 350){
-		for(int i = 350;i <= degress;i++){
-			set_pwm_duty(4, i);
-			delay_ms(20);
-		}	
+		set_pwm_duty(4, degress);
+		delay_ms(20);
+			
 	}
 }
 
@@ -441,6 +434,7 @@ void main(){
 			memcpy(&goPosX, arrayDataXII, sizeof(goPosX));
 			memcpy(&goPosY, arrayDataYII, sizeof(goPosY));
 			memcpy(&angleGrip, arrayAngGrip, sizeof(angleGrip));
+			//servo_Top(angleGrip);
 			move_posZ(7680, 1);
 			while(stateAll==0){
 				countX = 0;
@@ -456,7 +450,7 @@ void main(){
 				
 			}else if(stateII == 1){
 				move_posZ(6400, 1);//To bag
-				servo_Under(100, 0);
+				servo_Under(100, 1);
 				delay_ms(1000);
 				stateII++;
 				
@@ -467,8 +461,9 @@ void main(){
 				stateII++;
 			
 			}else if(stateII == 3){
-				moveXYZ(goPosX, arrayData[2], goPosY, arrayData[3], (6500-(1500*arrayData[4])), 1);//6500, 5000, 3500, 1000
-				//moveXYZ(goPosX, arrayData[2], goPosY, arrayData[3], 2000, 1);//6500, 5000, 3500, 1000
+				if(arrayData[4] == 5){
+					moveXYZ(goPosX, arrayData[2], goPosY, arrayData[3], 0, 1);
+				}else{moveXYZ(goPosX, arrayData[2], goPosY, arrayData[3], (6500-(1500*arrayData[4])), 1);}//6500, 5000, 3500, 1000
 				delay_ms(2000);
 				stateII++;
 
