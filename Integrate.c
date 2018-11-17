@@ -97,13 +97,13 @@ void SM_RxD(int c){
 	}else if (SM_id > 15 && SM_id <= 17){
 		arrayDataYII[SM_id - 16] = c;	//goY
 		SM_id++;
-	}else if (SM_id == 18){
-		arrayData[SM_id - 15] = c;	//goDir[3]
+	}else if (SM_id > 17 && SM_id <= 19){
+		arrayData[SM_id - 15] = c;	//goDir[3,4]
 		SM_id++;
-	}else if (SM_id > 18 && SM_id <= 20){
-		arrayAngGrip[SM_id - 19] = c;//Anggrip
+	}else if (SM_id > 19 && SM_id <= 21){
+		arrayAngGrip[SM_id - 20] = c;//Anggrip
 		SM_id++;
-		if(SM_id >= 21){
+		if(SM_id >= 22){
 			getPackage = 1;
 			SM_id = 1;
 		}
@@ -243,7 +243,7 @@ void move_posY(int pulse_y, int direc){
 	int check = 1;
 	while(check == 1){
 		int error = pulse_y - countY;
-			error *= 3.5;
+			error *= 5;
 		if(abs(error) <= tolerance){
 			control_inputY(0, direc);
 			check = 0;	
@@ -331,14 +331,20 @@ int stateSWIII = 0;
 }	
 
 void servo_Top(int degress){
-	if(degress < 350){
-		degress += 3;
+	if(degress <= 200){
+		degress += 5;
 		for(int i = 140;i <= degress;i++){
 			set_pwm_duty(4, i);
 			delay_ms(20);
 		}
-	}else{
-		for(int i = 140;i <= degress;i++){
+	}else if(degress > 200 && degress < 350){
+		degress -= 20;
+		for(int i = 200;i <= degress;i++){
+			set_pwm_duty(4, i);
+			delay_ms(20);
+		}
+	}else if(degress >= 350){
+		for(int i = 350;i <= degress;i++){
 			set_pwm_duty(4, i);
 			delay_ms(20);
 		}	
@@ -416,8 +422,8 @@ void main(){
 			countX = 0;
 			countY = 0;
 			countZ = 0;
-			//set_pwm_duty(5, 90);//for 5,up is 250,down is 100 ServoTop
-			/*if(stateII ==0){
+			//set_pwm_duty(4, 560);//for 5,up is 250,down is 100 ServoTop
+			/*if(stateII <= 5){
  				set_pwm_duty(4, 560);//for 4,up is 580,down is 80, center is 330 ServoUnder
  				delay_ms(5000);
 				set_pwm_duty(4, 350);
@@ -425,7 +431,7 @@ void main(){
 				set_pwm_duty(4, 145);
 				delay_ms(5000);
  				}stateII++;*/
-			//} z => base is 7680+7680+1536+768 = 17664, groud is 20736, 13824,  3390 top on box
+		//}z => base is 7680+7680+1536+768 = 17664, groud is 20736, 13824,  3390 top on box
 		int bagPosX, bagPosY, angle, goPosX, goPosY, angleGrip;
 		if (getPackage >= 1){
 			getPackage = 0;
@@ -436,7 +442,6 @@ void main(){
 			memcpy(&goPosY, arrayDataYII, sizeof(goPosY));
 			memcpy(&angleGrip, arrayAngGrip, sizeof(angleGrip));
 			move_posZ(7680, 1);
-
 			while(stateAll==0){
 				countX = 0;
 				countY = 0;
@@ -462,8 +467,9 @@ void main(){
 				stateII++;
 			
 			}else if(stateII == 3){
-				moveXYZ(goPosX, arrayData[2], goPosY, arrayData[3], 1000, 1);//6500, 5000, 3500, 1000
-				delay_ms(500);
+				moveXYZ(goPosX, arrayData[2], goPosY, arrayData[3], (6500-(1500*arrayData[4])), 1);//6500, 5000, 3500, 1000
+				//moveXYZ(goPosX, arrayData[2], goPosY, arrayData[3], 2000, 1);//6500, 5000, 3500, 1000
+				delay_ms(2000);
 				stateII++;
 
 			}else if(stateII == 4){
@@ -474,6 +480,8 @@ void main(){
 
 			}else{
 				set_Zero();
+				printf("End");
+				delay_ms(1500);
 				stateAll++;
 				}
 			}
