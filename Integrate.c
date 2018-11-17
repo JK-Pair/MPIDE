@@ -241,7 +241,7 @@ void move_posY(int pulse_y, int direc){
 	int check = 1;
 	while(check == 1){
 		int error = pulse_y - countY;
-			error *= 7;
+			error *= 6;
 		if(abs(error) <= tolerance){
 			control_inputY(0, direc);
 			check = 0;	
@@ -256,7 +256,7 @@ void move_posZ(int pulse_z, int direc){
 	int check = 1;
 	while(check == 1){
 	int error = pulse_z - countZ;
-		error *= 2;
+		error *= 3;
 		if(abs(error) <= tolerance){
 			control_inputZ(0, direc);	
 			check = 0;
@@ -331,16 +331,21 @@ int stateSWIII = 0;
 void servo_Top(int degress){
 	if(degress <= 200){
 		degress += 5;
-		set_pwm_duty(4, degress);
+		for(int i =140;i <= degress;i++){
+		set_pwm_duty(4, i);
 		delay_ms(20);
+		}
 	}else if(degress > 200 && degress < 350){
 		degress -= 20;
-		set_pwm_duty(4, degress);
+		for(int i = 165;i <= degress;i++){
+		set_pwm_duty(4, i);
 		delay_ms(20);
+		}
 	}else if(degress >= 350){
-		set_pwm_duty(4, degress);
+		for(int i = 145;i<= degress;i++){
+		set_pwm_duty(4, i);
 		delay_ms(20);
-			
+		}		
 	}
 }
 
@@ -455,14 +460,15 @@ void main(){
 				stateII++;
 				
 			}else if(stateII == 2){
+
 				move_posZ(2800, 0); //3390
 				servo_Top(angleGrip);
 				delay_ms(1000);
 				stateII++;
 			
 			}else if(stateII == 3){
-				if(arrayData[4] == 5){
-					moveXYZ(goPosX, arrayData[2], goPosY, arrayData[3], 0, 1);
+				if(arrayData[4] == 4){
+					moveXYZ(goPosX, arrayData[2], goPosY, arrayData[3], 550, 0);
 				}else{moveXYZ(goPosX, arrayData[2], goPosY, arrayData[3], (6500-(1500*arrayData[4])), 1);}//6500, 5000, 3500, 1000
 				delay_ms(2000);
 				stateII++;
@@ -470,7 +476,7 @@ void main(){
 			}else if(stateII == 4){
 				servo_Under(200, 0);
 				delay_ms(1000); 
-				move_posZ(9000, 0);
+				move_posZ(9700, 0);
 				stateII++;
 
 			}else{
@@ -483,4 +489,3 @@ void main(){
 		}	
 	}
 }
-
