@@ -219,34 +219,18 @@ void control_inputZ(int input, int direc){
 		}
 	}
 
-void move_posX(int pulse_x, int direc){
-	int check = 1;
-	while(check == 1){  
-		int error = pulse_x - countX;
-			error *= 4;
-		//printf("error:%d\n",error);
-		//delay_ms(10);
-
-		if(abs(error) <= tolerance){
-			control_inputX(0,direc);
-			check = 0;	
-		}else{
-			control_inputX(error, direc); 
-			
-		}
-	}
-}
-
-void move_posY(int pulse_y, int direc){
+void move_posXY(int pulse_X, int direc_X, int pulse_Y, int direc_Y){
 	int check = 1;
 	while(check == 1){
-		int error = pulse_y - countY;
-			error *= 7;
-		if(abs(error) <= tolerance){
-			control_inputY(0, direc);
-			check = 0;	
+		int error_X = 5*(pulse_X - countX);
+		int error_Y = 5*(pulse_Y - countY);
+		if(error_X <= tolerance && error_Y <= tolerance){
+			control_inputX(0, direc_X);
+			control_inputY(0, direc_Y);
+			check = 0;
 		}else{
-			control_inputY(error, direc); 
+			control_inputX(error_X, direc_X);
+			control_inputY(error_Y, direc_Y);	
 		}
 	}
 }
@@ -256,7 +240,7 @@ void move_posZ(int pulse_z, int direc){
 	int check = 1;
 	while(check == 1){
 	int error = pulse_z - countZ;
-		error *= 2;
+		error *= 3;
 		if(abs(error) <= tolerance){
 			control_inputZ(0, direc);	
 			check = 0;
@@ -278,82 +262,77 @@ void set_Z(void){
 		}
 	}
 }
-
-
 void set_Zero(void){
 	int loop = 1;
 	int stateSWII = 0;
 	while(loop == 1){
-		if(stateSWII == 0){
-			if(input(lim_SW_Y) == 1){
-				control_inputY(0,1);
-				stateSWII++;
-			}else if(input(lim_SW_Y) == 0){
-				control_inputY(700,0);
-			}
-		}else if(stateSWII == 1){  
+		if(stateSWII == 0){  
+			set_Z();
 			set_pwm_duty(4, 145);
 			delay_ms(1000);
 			set_pwm_duty(5, 100);
 			delay_ms(1000);
-			set_Z();
 			stateSWII++;
-		}else if(stateSWII == 2){  
-			if(input(lim_SW_X) == 1){
-				control_inputX(0,0);
-				loop=0;
-			}else if(input(lim_SW_X) == 0){
+		}else if(stateSWII == 1){
+			if(input(lim_SW_X) == 1 && input(lim_SW_Y) == 1){
+				control_inputX(0,1);
+				control_inputY(0,1);
+				loop = 0;
+			}else if(input(lim_SW_X) == 0 && input(lim_SW_Y) == 1){
 				control_inputX(700,0);
+				control_inputY(0,1);
+			}else if(input(lim_SW_X) == 1 && input(lim_SW_Y) == 0){
+				control_inputX(0,0);
+				control_inputY(700,0);
+			}else{
+				control_inputX(700,0);
+				control_inputY(700,0);
 			}
 		}
 	} 
 }
 
 void moveXYZ(int x, int direcX, int y, int direcY, int z, int direcZ){
-
 int loop = 1;
 int stateSWIII = 0;
 	while(loop == 1){
 		if(stateSWIII == 0){
-			move_posX(x, direcX);
+			move_posXY(x, direcX, y, direcY);
 			stateSWIII = 1;
 		}else if(stateSWIII == 1){  
-			move_posY(y, direcY);
-			stateSWIII = 2;
-		}else if(stateSWIII == 2){  
 			move_posZ(z, direcZ);
 			stateSWIII = 0;
 			loop = 0;
 		}
 	} 
-}	
+}
+	
 
 void servo_Top(int degress){
-	if(degress <= 200){
-		degress += 5;
-		set_pwm_duty(4, degress);
-		delay_ms(20);
-	}else if(degress > 200 && degress < 350){
-		degress -= 20;
-		set_pwm_duty(4, degress);
-		delay_ms(20);
-	}else if(degress >= 350){
-		set_pwm_duty(4, degress);
-		delay_ms(20);
-			
-	}
+	if(degress > 150 && degress < 350){
+		degress -= 15;
+		for(int i = 140;i<= degress;i+=5){
+			set_pwm_duty(4, i);
+			delay_ms(20);
+		}
+	}else{
+		for(int i = 145;i<= degress;i+=5)
+			set_pwm_duty(4, i);
+			delay_ms(20);
+	}	
 }
 
-void servo_Under(int degress, int time){
-	if(time == 0){
-		for(int i = 90;i <= degress;i++){
+
+void servo_Under(int degress){
+	if(degress <= 175){
+		for(int i = 250;i >= degress;i-=5){
+			set_pwm_duty(5, i);
+			delay_ms(50);
+		}
+	}else if(degress > 175){	
+		for(int i = 90;i <= degress;i+=5){
 			set_pwm_duty(5, i);
 			delay_ms(20);
-		}	
-	}else if(time == 1){
-		for(int i = 90;i <= degress;i++){
-			set_pwm_duty(5, i);
-			delay_ms(100);
 		}
 	}
 }
@@ -415,17 +394,9 @@ void main(){
 			countX = 0;
 			countY = 0;
 			countZ = 0;
-			//set_pwm_duty(4, 560);//for 5,up is 250,down is 100 ServoTop
-			/*if(stateII <= 5){
- 				set_pwm_duty(4, 560);//for 4,up is 580,down is 80, center is 330 ServoUnder
- 				delay_ms(5000);
-				set_pwm_duty(4, 350);
-				delay_ms(5000);
-				set_pwm_duty(4, 145);
-				delay_ms(5000);
- 				}stateII++;*/
-		//}z => base is 7680+7680+1536+768 = 17664, groud is 20736, 13824,  3390 top on box
+
 		int bagPosX, bagPosY, angle, goPosX, goPosY, angleGrip;
+		int space = 0;
 		if (getPackage >= 1){
 			getPackage = 0;
 			memcpy(&bagPosX, arrayDataXI, sizeof(bagPosX));
@@ -434,53 +405,71 @@ void main(){
 			memcpy(&goPosX, arrayDataXII, sizeof(goPosX));
 			memcpy(&goPosY, arrayDataYII, sizeof(goPosY));
 			memcpy(&angleGrip, arrayAngGrip, sizeof(angleGrip));
-			//servo_Top(angleGrip);
-			move_posZ(7680, 1);
+
 			while(stateAll==0){
 				countX = 0;
 				countY = 0;
 				countZ = 0;
 			
 			if(stateII == 0){
-				moveXYZ(bagPosX, arrayData[0], bagPosY, arrayData[1], 2300, 1);
+				moveXYZ(bagPosX, arrayData[0], bagPosY, arrayData[1], 1500, 1);
 				servo_Top(angle); //angle
-				servo_Under(220, 0);//up tp gu.
+				servo_Under(220);//up tp gu.
 				delay_ms(1000); 
 				stateII++;
 				
 			}else if(stateII == 1){
-				move_posZ(6400, 1);//To bag
-				servo_Under(100, 1);
+				move_posZ(6000, 1);//To bag 6500
+				servo_Under(90);
 				delay_ms(1000);
 				stateII++;
 				
 			}else if(stateII == 2){
-				move_posZ(2800, 0); //3390
-				servo_Top(angleGrip);
+				move_posZ(3500, 0); //3390
+				if(angle <= 350){
+					if(abs(angle - angleGrip) < 200){
+						space = angleGrip + 200;
+						servo_Top(space);
+						delay_ms(1000);
+						servo_Top(angleGrip);
+					}else{servo_Top(angleGrip);}
+				}else{
+					if(abs(angle - angleGrip) < 200){
+						space = angleGrip - 200;
+						servo_Top(space);
+						delay_ms(1000);
+						servo_Top(angleGrip);
+					}else{servo_Top(angleGrip);}
+				}
 				delay_ms(1000);
 				stateII++;
 			
 			}else if(stateII == 3){
-				if(arrayData[4] == 5){
-					moveXYZ(goPosX, arrayData[2], goPosY, arrayData[3], 0, 1);
-				}else{moveXYZ(goPosX, arrayData[2], goPosY, arrayData[3], (6500-(1500*arrayData[4])), 1);}//6500, 5000, 3500, 1000
-				delay_ms(2000);
+
+				if(arrayData[4] == 4){
+					moveXYZ(goPosX, arrayData[2], goPosY, arrayData[3], 250, 0);
+				}else if(arrayData[4] == 0){
+					moveXYZ(goPosX, arrayData[2], goPosY, arrayData[3], 8500, 1);
+				}else if(arrayData[4] == 2){
+					moveXYZ(goPosX, arrayData[2], goPosY, arrayData[3], (8500-(1500*arrayData[4])), 1);
+				}else{moveXYZ(goPosX, arrayData[2], goPosY, arrayData[3], (8500-(1500*arrayData[4])), 1);}
+
+				delay_ms(1000);//2000
 				stateII++;
 
 			}else if(stateII == 4){
-				servo_Under(200, 0);
-				delay_ms(1000); 
-				move_posZ(9000, 0);
+				servo_Under(180);
+				delay_ms(1000);//1000 
+				set_Z();
 				stateII++;
 
-			}else{
+			}else{ 
 				set_Zero();
 				printf("End");
-				delay_ms(1500);
+				delay_ms(1000);
 				stateAll++;
 				}
 			}
 		}	
 	}
 }
-

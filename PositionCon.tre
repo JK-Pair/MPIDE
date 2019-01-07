@@ -1,21 +1,16 @@
 ÀÄPositionCon
-   ÃÄMAIN  0/394  Ram=0
+   ÃÄMAIN  0/292  Ram=0
    ³  ÃÄ@cinit1  (Inline)  Ram=0
-   ³  ÃÄInit_Interrupts  0/38  Ram=0
-   ³  ÃÄmove_posX  0/70  Ram=9
-   ³  ³  ÃÄcontrol_inputX  0/278  Ram=13
-   ³  ³  ³  ÃÄ@SI64TOF64  0/100  Ram=0
-   ³  ³  ³  ÃÄ@DIVFF64  0/264  Ram=8
-   ³  ³  ³  ÃÄ@MULFF64  0/272  Ram=0
-   ³  ³  ³  ÃÄ@F64TOSI64  0/86  Ram=0
-   ³  ³  ³  ÃÄ@SI64TOF64  0/100  Ram=0
-   ³  ³  ³  ÃÄ@DIVFF64  0/264  Ram=8
-   ³  ³  ³  ÃÄ@MULFF64  0/272  Ram=0
-   ³  ³  ³  ÀÄ@F64TOSI64  0/86  Ram=0
-   ³  ³  ÀÄcontrol_inputX  0/278  Ram=13
-   ³  ³     ÀÄ*
-   ³  ÃÄ@const1207  0/20  Ram=0
-   ³  ÀÄ@PRINTFD16_115200_5725_5724  0/246  Ram=0
-   ÃÄINT_EXT_INPUT0  0/42  Ram=0
-   ÃÄINT_EXT_INPUT1  0/42  Ram=0
-   ÀÄINT_EXT_INPUT2  0/42  Ram=0
+   ³  ÃÄInit_Interrupts  0/56  Ram=0
+   ³  ÃÄ@const783  0/20  Ram=0
+   ³  ÃÄ@PRINTFD16_115200_5725_5724  0/246  Ram=0
+   ³  ÃÄ@delay_ms1  0/16  Ram=2
+   ³  ÀÄservo_Top  0/128  Ram=2
+   ³     ÃÄ@delay_ms1  0/16  Ram=2
+   ³     ÃÄ@delay_ms1  0/16  Ram=2
+   ³     ÀÄ@delay_ms1  0/16  Ram=2
+   ÃÄUART1_Isr  0/50  Ram=2
+   ³  ÀÄSM_RxD  0/412  Ram=7
+   ÃÄINT_EXT_INPUT0  0/34  Ram=0
+   ÃÄINT_EXT_INPUT1  0/34  Ram=0
+   ÀÄINT_EXT_INPUT2  0/34  Ram=0

@@ -1,25 +1,25 @@
 W0      @SCRATCH
 W0L     _RETURN_
-W0 -W3  @MULFF64.P1
+W0      @delay_us1.P1
 W0 -W1  @READ_ROM_MEMORY.P2
-W0      @delay_us1.P3
+W0 -W3  @SI64TOF64.P3
 W0 -W3  @F64TOSI64.P4
 W0 -W1  @DIV3232B.P5
 W0      @delay_ms1.P6
-W0 -W3  @SI64TOF64.P7
-W0 -W3  @DIVFF64.P8
+W0 -W3  @DIVFF64.P7
+W0 -W3  @MULFF64.P8
 W1      @SCRATCH
-W1      @WRITE_PACKED_MEMORY.P1
-W1      @READ_PACKED_MEMORY.P2
-W2      @READ_PACKED_MEMORY.P1
-W2 -W3  @DIV3232B.P2
+W1      @READ_PACKED_MEMORY.P1
+W1      @WRITE_PACKED_MEMORY.P2
+W2 -W3  @DIV3232B.P1
+W2      @READ_PACKED_MEMORY.P2
 W2      @READ_ROM_MEMORY.P3
 W2      @WRITE_PACKED_MEMORY.P4
 W3      @READ_ROM_MEMORY.P1
-W3      @READ_PACKED_MEMORY.P2
-W3      @WRITE_PACKED_MEMORY.P3
-W4 -W7  @DIVFF64.P1
-W4 -W7  @MULFF64.P2
+W3      @WRITE_PACKED_MEMORY.P2
+W3      @READ_PACKED_MEMORY.P3
+W4 -W7  @MULFF64.P1
+W4 -W7  @DIVFF64.P2
 630.6   C1OUT
 630.7   C2OUT
 800-801 countX
@@ -42,82 +42,80 @@ W4 -W7  @MULFF64.P2
 826-827 MAIN.goPosX
 828-829 MAIN.goPosY
 82A-82B MAIN.angleGrip
-834-835 servo_Top.degress
-834-835 set_Zero.loop
-834-835 servo_Under.degress
-834-835 moveXYZ.x
-836-837 servo_Top.i
-836-837 set_Zero.stateSWII
-836-837 servo_Under.time
-836-837 moveXYZ.direcX
-838-839 servo_Top.i
-838-839 moveXYZ.y
+82C-82D MAIN.space
+836-837 set_Zero.loop
+836-837 servo_Under.degress
+836-837 servo_Top.degress
 838-839 servo_Under.i
-83A-83B set_Z.check
-83A-83B moveXYZ.direcY
+838-839 set_Zero.stateSWII
+838-839 servo_Top.i
 83A-83B servo_Under.i
-83C-83D moveXYZ.z
-83E-83F moveXYZ.direcZ
-840-841 moveXYZ.loop
-842-843 moveXYZ.stateSWIII
-850-851 move_posZ.pulse_z
-850-851 move_posX.pulse_x
-850-851 move_posY.pulse_y
-852-853 move_posY.direc
-852-853 move_posX.direc
-852-853 move_posZ.direc
-854-855 move_posZ.check
-854-855 move_posY.check
-854-855 move_posX.check
-856-857 move_posY.error
-856-857 move_posX.error
-856-857 move_posZ.error
-85C-85D control_inputZ.input
-85C-85D control_inputY.input
-85C-85D control_inputX.input
-85E-85F control_inputY.direc
-85E-85F control_inputX.direc
-85E-85F control_inputZ.direc
-88C-88D UART1_Isr.c
-88E-88F SM_RxD.c
+83A-83B servo_Top.i
+83A-83B moveXYZ.x
+83C-83D moveXYZ.direcX
+83C-83D set_Z.check
+83E-83F moveXYZ.y
+840-841 moveXYZ.direcY
+842-843 moveXYZ.z
+844-845 moveXYZ.direcZ
+846-847 moveXYZ.loop
+848-849 moveXYZ.stateSWIII
+856-857 move_posZ.pulse_z
+856-857 move_posXY.pulse_X
+858-859 move_posXY.direc_X
+858-859 move_posZ.direc
+85A-85B move_posXY.pulse_Y
+85A-85B move_posZ.check
+85C-85D move_posXY.direc_Y
+85C-85D move_posZ.error
+85E-85F move_posXY.check
+860-861 move_posXY.error_X
+862-863 control_inputZ.input
+862-863 move_posXY.error_Y
+864-865 control_inputZ.direc
+86C-86D control_inputX.input
+86C-86D control_inputY.input
+86E-86F control_inputY.direc
+86E-86F control_inputX.direc
+892-893 UART1_Isr.c
+894-895 SM_RxD.c
 2780-27FF Stack
 
 ROM Allocation:
 000DFC  SM_RxD
-000F90  UART1_Isr
-000FC2  INT_EXT_INPUT0
-000FE4  INT_EXT_INPUT1
-001006  INT_EXT_INPUT2
-001028  Init_Interrupts
-001060  @SI64TOF64
-0010C4  @DIVFF64
-0011CC  @MULFF64
-0012DC  @F64TOSI64
-001332  control_inputY
-001448  @delay_ms1
-001458  control_inputZ
-00156E  set_Z
-0015A2  control_inputX
-0016B8  set_Zero
-001740  move_posZ
-00178C  move_posX
-0017D8  move_posY
-001848  moveXYZ
-00189C  servo_Top
-0018E2  servo_Under
-001924  @cinit1
-001924  MAIN
-001984  @cinit2
+000F98  UART1_Isr
+000FCA  INT_EXT_INPUT0
+000FEC  INT_EXT_INPUT1
+00100E  INT_EXT_INPUT2
+001030  Init_Interrupts
+001068  @SI64TOF64
+0010CC  @DIVFF64
+0011D4  @MULFF64
+0012E4  @F64TOSI64
+00133A  control_inputZ
+001450  set_Z
+001484  @delay_ms1
+001494  control_inputX
+0015AA  control_inputY
+0016C0  set_Zero
+001778  move_posXY
+0017DA  move_posZ
+001826  moveXYZ
+00186A  servo_Top
+0018C0  servo_Under
+001910  MAIN
+001910  @cinit1
+001970  @cinit2
 
 Project Directory:
     C:\Users\thipawan\Desktop\Embedded\MilestoneIII\MPIDE\
 
 Project Files:
-    Integrate.c                                             [16-Nov-18 20:06  CRC=7812C37D]
+    Integrate.c                                             [25-Nov-18 23:17  CRC=41D4A318]
     ..\..\..\..\..\..\Program Files (x86)\PICC\devices\24FJ48GA002.h [12-Nov-13 14:36  CRC=2B092578]
     BL_Support.h                                            [28-Oct-16 04:52  CRC=87294453]
 
-Source signature=B16E719B
+Source signature=7B305136
 
 Units:
     Integrate (main)

@@ -1,68 +1,67 @@
 
-ROM used:   3838/33788 (11%)
-            3838/33788 (11%) including unused fragments
+ROM used:   4110/33788 (12%)
+            4110/33788 (12%) including unused fragments
 
-            2.8 Average locations per line
-            11.2 Average locations per statement
+            3.0 Average locations per line
+            11.4 Average locations per statement
 
-RAM used:   155/8192 (2%) at main() level
-            271/8192 (3%) worst case
+RAM used:   158/8192 (2%) at main() level
+            277/8192 (3%) worst case
 
 Stack size: 128
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  484   344 100  Integrate.c
+  476   360 100  Integrate.c
   862     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\devices\24FJ48GA002.h
    33     0   0  BL_Support.h
 ----- -----
- 1379   344 Total
+ 1371   360 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
 0     16   0    2             @delay_ms1
-0    404   5    7  2006  6.9  SM_RxD
+0    412   5    7  2040  6.9  SM_RxD
 0     50   1    2    40  1.7  UART1_Isr
-0    278   4   13  1121  5.5  control_inputX
+0    278   3   13  1121  5.5  control_inputX
 0    100   1    0             @SI64TOF64
 0    264   3    8             @DIVFF64
-0    272   4    0             @MULFF64
+0    272   3    0             @MULFF64
 0     86   1    0             @F64TOSI64
-0    278   4   13  1121  5.5  control_inputY
-0    278   4   13  1121  5.5  control_inputZ
-0     76   1    9   287  6.2  move_posX
-0    112   1    9   289  6.0  move_posY
+0    278   3   13  1121  5.5  control_inputY
+0    278   3   13  1121  5.5  control_inputZ
+0     98   1   10   474  7.2  move_posXY
 0     76   1    9   287  6.2  move_posZ
 0     52   1    4   233  4.1  set_Z
-0    136   2    6   783  4.9  set_Zero
-0     84   1   16   494  5.1  moveXYZ
-0     70   1    2   341  6.0  servo_Top
-0     66   1    4   362  5.7  servo_Under
+0    184   2    8   989  5.4  set_Zero
+0     68   1   16   410  5.2  moveXYZ
+0     86   1    2   381  7.0  servo_Top
+0     80   1    2   364  6.5  servo_Under
 0     34   0    0    17  1.3  INT_EXT_INPUT0
 0     34   0    0    17  1.3  INT_EXT_INPUT1
 0     34   0    0    17  1.3  INT_EXT_INPUT2
 0     56   1    0   336  2.3  Init_Interrupts
-0    474   6    0  2599  7.5  MAIN
+0    766   9    3  4121 10.0  MAIN
  Inline         0             @cinit1
 
 Program metrics:
-    Functions               18
-    Statements              344
-    Comments                203
-    Volume (V)              18024
-    Difficulty (D)          84.0
-    Effort to implement (E) 1514726
-    Time to implement (T)   23 hours, 23 minutes
-    Est Delivered Bugs (B)  4
-    Cyclomatic Complexity   63
-    Maintainability (MI)    42
+    Functions               17
+    Statements              360
+    Comments                192
+    Volume (V)              19849
+    Difficulty (D)          83.8
+    Effort to implement (E) 1663714
+    Time to implement (T)   25 hours, 40 minutes
+    Est Delivered Bugs (B)  5
+    Cyclomatic Complexity   65
+    Maintainability (MI)    40
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00BFE     0  3072  
 00C00-00C02     4  0  
 00C04-00DFA   504  0  
-00DFC-083FA  3330  26878  
+00DFC-083FA  3602  26606  
 
 
 
